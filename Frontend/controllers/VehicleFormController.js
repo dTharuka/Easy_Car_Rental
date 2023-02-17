@@ -74,7 +74,7 @@ function getAllVehicle() {
                 $("#vehicleTableBody").append(row);
             }
             //
-            // bindRowClickEventsForDriver();            // clearTextFields();
+            bindRowClickEventsVehicle();           // clearTextFields();
         }, error: function (error) {
             let message = JSON.parse(error.responseText).message;
             alert(message);
@@ -130,3 +130,47 @@ $("#updateVehicle").on('click', function () {
         }
     });
 });
+
+function bindRowClickEventsVehicle() {
+    $("#vehicleTableBody>tr").click(function (){
+
+        let vehicleId=$(this).children(":eq(0)").text();
+        let noOfPassengers=$(this).children(":eq(1)").text();
+        let extraKmPrice=$(this).children(":eq(2)").text();
+        let registrationNo=$(this).children(":eq(3)").text();
+        let Colour=$(this).children(":eq(4)").text();
+        let daily_amount=$(this).children(":eq(5)").text();
+        let monthly_amount=$(this).children(":eq(6)").text();
+        let Availability=$(this).children(":eq(7)").text();
+        let brand=$(this).children(":eq(8)").text();
+        let transmission=$(this).children(":eq(9)").text();
+        let daily_km=$(this).children(":eq(10)").text();
+        let monthly_km=$(this).children(":eq(11)").text();
+        let fuelType=$(this).children(":eq(12)").text();
+        let damageFee=$(this).children(":eq(13)").text();
+        let vehicleType=$(this).children(":eq(14)").text();
+        let service_milage=$(this).children(":eq(15)").text();
+        let last_service=$(this).children(":eq(16)").text();
+
+
+            $('#vehicleId').val(vehicleId);
+            $('#registrationNo').val(registrationNo);
+            $('#vehicleBrand').val(brand);
+            $('#vehicleType').val(vehicleType);
+            $('#fuelType').val(fuelType);
+            $('#numberOfPassenger').val(noOfPassengers);
+            $('#vehicleColour').val(Colour);
+            $('#transmissionType').val(transmission);
+            $('#refundableDamagedFee').val(damageFee);
+            $('#vehicleMileage').val(service_milage);
+            $('#dailyRate').val(daily_amount);
+            $('#monthlyMileage').val(monthly_km);
+            $('#lastServiceMileage').val(last_service);
+            $('#extraKmPer').val(extraKmPrice);
+            $('#vehicleAvailability').val(Availability);
+            $('#dailyMileage').val(daily_km);
+            $('#monthlyRate').val(monthly_amount)
+
+
+    });
+}
