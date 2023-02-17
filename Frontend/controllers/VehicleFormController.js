@@ -122,9 +122,9 @@ $("#updateVehicle").on('click', function () {
         data: JSON.stringify(vehicleObj),
         dataType: "json",
         success: function (res) {
-            getAllCustomers();
+            getAllVehicle();
             alert(res.message);
-            clearTextFields();
+            // clearTextFields();
         }, error: function (error) {
             alert(JSON.parse(error.responseText).message);
         }
