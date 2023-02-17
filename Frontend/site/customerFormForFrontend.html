@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
+    <!-- Nucleo Icons -->
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet"/>
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <link href="../assets/css/style.css" rel="stylesheet"/>
+    <!-- Font Awesome Icons -->
+    <!--
+        <script crossorigin="anonymous" src="https://kit.fontawesome.com/42d5adcbca.js"></script>
+    -->
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <!-- CSS Files -->
+    <link href="../assets/css/soft-ui-dashboard.css?v=1.0.7" id="pagestyle" rel="stylesheet"/>
+</head>
+<body>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-8">
+            <div class="card content-center">
+                <div class="card-body">
+                    <form id="CustomerFormController">
+                        <div class="row form-group">
+                            <div class="col-12">
+                                <h5 class="form-title"><span>Customer Information</span></h5>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Register Id</label>
+                                    <input class="form-control" id="id" name="id" type="text">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <!--<input class="form-control" id="name.firstName" name="name.firstName"
+                                           type="text">-->
+                                    <input class="form-control" id="firstName" name="name.firstName"
+                                           type="text">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input class="form-control" id="lastName" name="name.lastName" type="text">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <div>
+                                        <input class="form-control" id="address" name="address">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input class="form-control" id="email" name="email" type="text">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Contact</label>
+                                    <input class="form-control" id="contactNo" name="contactNo" type="text">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>User Name</label>
+                                    <input class="form-control" id="userName" name="user.userName" type="text">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>User ID</label>
+                                    <input class="form-control" disabled id="userId" type="text">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>password</label>
+                                    <input class="form-control" id="password" name="user.password" type="text">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>NIC</label>
+                                    <div>
+                                        <input class="form-control" id="nic" name="nic">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>LicenceNo</label>
+                                    <input class="form-control" id="drivingLicenseNo" name="drivingLicenseNo"
+                                           type="text">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <select class="form-control" id="role" name="user.role">
+                                        <option>Select Type</option>
+                                        <option>CUSTOMER</option>
+                                        <option>DRIVER</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-12">
+                                <br>
+                                <div></div>
+                                <br>
+                                <div>
+                                    <button class="btn btn-primary bg-success " id="saveCustomer" type="button">Save
+                                    </button>
+                                    <button class="btn btn-primary bg-gradient-danger" href="../Frontend/index.html"
+                                            id="backToIndex" type="button">Cancel
+                                    </button>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-3.6.1.min.js"></script>
+<script src="../controllers/CustomerFormController.js"></script>
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+
+</body>
+</html>
