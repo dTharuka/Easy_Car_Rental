@@ -55,6 +55,7 @@ $("#updateCustomer").on('click', function () {
             clearTextFields();
             getAllCustomers();
             alert(res.message);
+
         },
         error: function (error) {
             alert(JSON.parse(error.responseText).message);

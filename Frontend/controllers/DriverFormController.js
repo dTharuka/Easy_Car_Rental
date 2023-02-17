@@ -68,13 +68,12 @@ alert("hello")
 
     var driver={
         id: $("#id").val(),//TODO check what can i do for this error
-        nic: $('#userId').val(),
         name:{firstName: $("#firstName").val(),lastName:$('#lastName').val()},
         address:$('#address').val(),
         drivingLicenseNo:$('#drivingLicenseNo').val(),
         email:$('#email').val(),
         contactNo:$('#contactNo').val(),
-        user:{userName: $("#userName").val()},
+        user:{userName: $("#userName").val(),userId: $('#userId').val()},
         driverAvailability:$("#driverAvailability").val()
     }
 

@@ -49,7 +49,7 @@ $("#deleteAdmin").on('click', function () {
             data: JSON.stringify(adminObj),
             dataType: "json",
             success: function (resp) {
-                getAllCustomers();
+                getAllAdmins();
                 alert(resp.message);
                 clearTextFields();
             }, error: function (error) {

@@ -86,13 +86,14 @@ function getAllVehicle() {
 
 $("#deleteVehicle").on('click', function () {
     $.ajax({
-        url: baseURL + "?code=" + $("#id").val(), method: "delete", dataType: "json", success: function (resp) {
+        url: baseURL + "?code=" + $("#vehicleId").val(), method: "delete", dataType: "json", success: function (resp) {
           getAllVehicle();
             alert(resp.message);
         }, error: function (error) {
             alert(JSON.parse(error.responseText).message);
         }
     });
+
 });
 
 $("#updateVehicle").on('click', function () {
@@ -107,8 +108,8 @@ $("#updateVehicle").on('click', function () {
         transmissionType:$('#transmissionType').val(),
         refundableDamagedFee:$('#refundableDamagedFee').val(),
         vehicleMileage:$('#vehicleMileage').val(),
-        vehiclePriceRate:{vehiclePriceRate: $('#dailyRate').val()},//TODO check what can i do for this error
-        freeMileage:{freeMileage: $('#monthlyMileage').val()},//TODO check what can i do for this error
+        vehiclePriceRate: {dailyRate: $('#dailyRate').val(),monthlyRate: $('#monthlyRate').val()},//TODO check what can i do for this error
+        freeMileage: {monthlyMileage: $('#monthlyMileage').val(),dailyMileage: $('#dailyMileage').val()},//TODO check what can i do for this error
         lastServiceMileage:$('#lastServiceMileage').val(),
         extraKmPer:$('#extraKmPer').val(),
         vehicleAvailability:$('#vehicleAvailability').val()
