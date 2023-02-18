@@ -45,7 +45,7 @@ function getAllVehicle() {
 
                 let vehicleType = c.vehicleType;
 
-                let service_milage = null;
+                let service_milage = c.vehicleMileage;
 
                 let last_service = c.lastServiceMileage;
 
@@ -97,6 +97,7 @@ $("#deleteVehicle").on('click', function () {
 });
 
 $("#updateVehicle").on('click', function () {
+    alert( $('#vehicleMileage').val());
     var vehicleObj = {
         vehicleId:$('#vehicleId').val(),//TODO check what can i do for this error
         registrationNo:$('#registrationNo').val(),
@@ -107,7 +108,7 @@ $("#updateVehicle").on('click', function () {
         vehicleColour:$('#vehicleColour').val(),
         transmissionType:$('#transmissionType').val(),
         refundableDamagedFee:$('#refundableDamagedFee').val(),
-        vehicleMileage:$('#vehicleMileage').val(),
+        vehicleMileage: $('#vehicleMileage').val(),
         vehiclePriceRate: {dailyRate: $('#dailyRate').val(),monthlyRate: $('#monthlyRate').val()},//TODO check what can i do for this error
         freeMileage: {monthlyMileage: $('#monthlyMileage').val(),dailyMileage: $('#dailyMileage').val()},//TODO check what can i do for this error
         lastServiceMileage:$('#lastServiceMileage').val(),
