@@ -97,7 +97,7 @@ $("#deleteVehicle").on('click', function () {
 });
 
 $("#updateVehicle").on('click', function () {
-    alert( $('#vehicleMileage').val());
+
     var vehicleObj = {
         vehicleId:$('#vehicleId').val(),//TODO check what can i do for this error
         registrationNo:$('#registrationNo').val(),
