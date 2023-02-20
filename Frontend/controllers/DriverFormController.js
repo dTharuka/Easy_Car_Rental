@@ -11,6 +11,7 @@ function saveDriver() {
     $.ajax({
         url: baseURL + "save_driver", method: "post", data: formData, dataType: "json", success: function (res) {
             getAllDrivers();
+            clearDriverTxt();
             alert(res.message);
         }, error: function (error) {
             var errorMessage = JSON.parse(error.responseText);
@@ -55,6 +56,7 @@ $("#deleteDriver").on('click', function () {
     $.ajax({
         url: baseURL + "?code=" + $("#id").val(), method: "delete", dataType: "json", success: function (resp) {
             getAllDrivers();
+            clearDriverTxt()
             alert(resp.message);
         }, error: function (error) {
             alert(JSON.parse(error.responseText).message);
@@ -63,8 +65,6 @@ $("#deleteDriver").on('click', function () {
 });
 
 $("#updateDriver").on('click', function () {
-
-alert("hello")
 
     var driver={
         id: $("#id").val(),//TODO check what can i do for this error
@@ -85,6 +85,7 @@ alert("hello")
         dataType: "json",
         success: function (res) {
             getAllDrivers();
+            clearDriverTxt();
             alert(res.message);
         },
         error: function (error) {
@@ -119,7 +120,109 @@ function bindRowClickEventsForDriver() {
         $('#drivingLicenseNo').val(drivingLicenseNo);
         $('#role').val(role);
         $('#userName').val(userNamme);
-        $('#driverAvailability').val(driverAvailability)
+        $('#driverAvailability').val(driverAvailability);
 
     });
 }
+
+function clearDriverTxt(){
+    $('#id').val("");
+    $('#firstName').val("");
+    $('#lastName').val("");
+    $('#address').val("");
+    $('#email').val("");
+    $('#contactNo').val("");
+    $('#userId').val("");
+    $('#password').val("");
+    $('#drivingLicenseNo').val("");
+    $('#role').val("");
+    $('#userName').val("");
+    $('#driverAvailability').val("");
+}
+
+function driValidator(txtField, regXPattern, nextTxtField) {
+
+
+    $(txtField).on('keyup', function (e) {
+
+            if (regXPattern.test($(txtField).val())) {
+                $(txtField).css('border', '3px solid green');
+
+
+                if (e.key === "Enter" && txtField !== "#userId") {
+                    $(nextTxtField).focus();
+
+                } else if (e.key === "Enter" && txtField === "#userId") {
+                    saveCustomer();
+                    $(nextTxtField).focus();
+
+                } else {
+                    return false;
+                }
+
+            } else {
+                $(txtField).css('border', '3px solid red');
+            }
+        }
+    )
+}
+
+driValidator(
+    '#id',
+    /^(D00)[0-9]{1,4}$/,
+    '#address'
+)
+
+driValidator(
+    '#address',
+    /^[A-z]{3,30}$/,
+    '#contactNo'
+)
+
+driValidator(
+    '#contactNo',
+    /^(07([1245678])|091)(-)[0-9]{7}$/,
+    '#driverAvailability'
+)
+
+driValidator(
+    '#driverAvailability',
+    /^[A-Z]{3,30}$/,
+    '#drivingLicenseNo'
+)
+
+driValidator(
+    '#drivingLicenseNo',
+    /^[0-9]{3,10}/,
+    '#email'
+)
+
+driValidator(
+    '#email',
+    /^[a-z]{3,30}@gmail.com$/,
+    '#firstName'
+)
+
+driValidator(
+    '#firstName',
+    /^[A-z]{3,30}$/,
+    '#lastName'
+)
+
+driValidator(
+    '#lastName',
+    /^[A-z]{3,30}$/,
+    '#userName'
+)
+
+driValidator(
+    '#userName',
+    /^[A-z]{3,30}$/,
+    '#userId'
+)
+
+driValidator(
+    '#userId',
+    /^[0-9]{3,30}$/,
+    '#id'
+)

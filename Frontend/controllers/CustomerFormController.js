@@ -154,72 +154,72 @@ function clearTextFields() {
     $('#userId').val("");
 }
 
-validator(
+cusValidator(
     '#id',
     /^(C00-00)[0-9]{1,4}$/,
     '#firstName'
 )
 
-validator(
+cusValidator(
     '#firstName',
     /^[A-z]{3,30}$/,
     '#lastName'
 )
 
-validator(
+cusValidator(
     '#lastName',
     /^[A-z]{3,30}$/,
     '#address'
 )
 
-validator(
+cusValidator(
     '#address',
     /^[A-z]{3,30}$/,
     '#email'
 )
 
-validator(
+cusValidator(
     '#email',
     /^[a-z]{3,30}@gmail.com$/,
     '#contactNo'
 )
 
-validator(
+cusValidator(
     '#contactNo',
     /^(07([1245678])|091)(-)[0-9]{7}$/,
     '#userName'
 )
 
-validator(
+cusValidator(
     '#userName',
     /^[A-z]{3,30}$/,
     '#password'
 )
 
-validator(
+cusValidator(
     '#password',
     /^[0-9]{3,30}$/,
     '#nic'
 )
 
-validator(
+cusValidator(
     '#nic',
     /^[0-9]{3,30}$/,
     '#drivingLicenseNo'
 )
 
-validator(
+cusValidator(
     '#drivingLicenseNo',
     /^[0-9]{3,30}$/,
     '#role'
 )
 
-validator(
+cusValidator(
     '#role',
     /^[A-Z]{3,30}$/,
     '#id'
 )
- function validator(txtField, regXPattern, nextTxtField) {
+ function cusValidator(txtField, regXPattern, nextTxtField) {
 
 
     $(txtField).on('keyup', function (e) {
@@ -227,7 +227,7 @@ validator(
             if (regXPattern.test($(txtField).val())) {
                 $(txtField).css('border', '3px solid green');
 
-                /** this one is compatible for customer form */
+
                 if (e.key === "Enter" && txtField !== "#role") {
                     $(nextTxtField).focus();
 
