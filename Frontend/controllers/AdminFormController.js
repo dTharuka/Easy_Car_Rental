@@ -67,19 +67,31 @@ function getAllAdmins() {
         url: baseURL + "get_all_admin", success: function (res) {
             for (let c of res.data) {
 
-                let id = c.adminId;
-                let nic = c.adminNic;
+                let adminId = c.adminId;
+                let adminNic = c.adminNic;
                 let firstName = c.name.firstName;
                 let lastName = c.name.lastName;
-                let address = c.adminAddress;
-                let email = c.adminEmail;
-                let contact = c.adminContact;
-                let username = c.user.userName;
+                let adminAddress = c.adminAddress;
+                let adminEmail = c.adminEmail;
+                let adminContact = c.adminContact;
+                let userName = c.user.userName;
                 let password = c.user.password;
 
 
+                let row = "<tr>"
+                    + "<td>" + firstName + "</td>"
+                    + "<td>" + lastName + "</td>"
+                    + "<td>" + adminAddress + "</td>"
+                    + "<td>" + adminContact + "</td>"
+                    + "<td>" + adminEmail + "</td>"
+                    + "<td>" + userName + "</td>"
+                    + "<td>" + password + "</td>"
+                    + "<td>" + null + "</td>"
+                    + "<td>" + adminNic + "</td>"
+                    + "<td>" + adminId + "</td>"
+                    + "</tr>";
 
-                let row = "<tr>" + "<td>" + firstName + "</td>" + "<td>" + lastName + "</td>" + "<td>" + address + "</td>" + "<td>" + contact + "</td>" + "<td>" + email + "</td>" + "<td>" + username + "</td>" + "<td>" + password + "</td>" + "<td>" + password + "</td>" + "<td>" + nic + "</td>" + "<td>" + id + "</td>" + "</tr>";
+                // let row = "<tr>" + "<td>" + firstName + "</td>" + "<td>" + lastName + "</td>" + "<td>" + address + "</td>" + "<td>" + contact + "</td>" + "<td>" + email + "</td>" + "<td>" + username + "</td>" + "<td>" + password + "</td>" + "<td>" + password + "</td>" + "<td>" + nic + "</td>" + "<td>" + id + "</td>" + "</tr>";
                 $("#adminTableBody").append(row);
             }
             bindRowClickEventsForAdminTable();

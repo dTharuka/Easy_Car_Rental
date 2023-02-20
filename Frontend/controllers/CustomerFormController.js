@@ -140,16 +140,108 @@ function bindRowClickEvents() {
 }
 
 function clearTextFields() {
-    $('#id').val();
-    $('#firstName').val();
-    $('#lastName').val();
-    $('#address').val();
-    $('#email').val();
-    $('#contactNo').val();
-    $('#userName').val();
-    $('#password').val();
-    $('#nic').val();
-    $('#drivingLicenseNo').val();
-    $('#role').val();
-    $('#userId').val();
+    $('#id').val("");
+    $('#firstName').val("");
+    $('#lastName').val("");
+    $('#address').val("");
+    $('#email').val("");
+    $('#contactNo').val("");
+    $('#userName').val("");
+    $('#password').val("");
+    $('#nic').val("");
+    $('#drivingLicenseNo').val("");
+    $('#role').val("");
+    $('#userId').val("");
+}
+
+validator(
+    '#id',
+    /^(C00-00)[0-9]{1,4}$/,
+    '#firstName'
+)
+
+validator(
+    '#firstName',
+    /^[A-z]{3,30}$/,
+    '#lastName'
+)
+
+validator(
+    '#lastName',
+    /^[A-z]{3,30}$/,
+    '#address'
+)
+
+validator(
+    '#address',
+    /^[A-z]{3,30}$/,
+    '#email'
+)
+
+validator(
+    '#email',
+    /^[a-z]{3,30}@gmail.com$/,
+    '#contactNo'
+)
+
+validator(
+    '#contactNo',
+    /^(07([1245678])|091)(-)[0-9]{7}$/,
+    '#userName'
+)
+
+validator(
+    '#userName',
+    /^[A-z]{3,30}$/,
+    '#password'
+)
+
+validator(
+    '#password',
+    /^[0-9]{3,30}$/,
+    '#nic'
+)
+
+validator(
+    '#nic',
+    /^[0-9]{3,30}$/,
+    '#drivingLicenseNo'
+)
+
+validator(
+    '#drivingLicenseNo',
+    /^[0-9]{3,30}$/,
+    '#role'
+)
+
+validator(
+    '#role',
+    /^[A-Z]{3,30}$/,
+    '#id'
+)
+ function validator(txtField, regXPattern, nextTxtField) {
+
+
+    $(txtField).on('keyup', function (e) {
+
+            if (regXPattern.test($(txtField).val())) {
+                $(txtField).css('border', '3px solid green');
+
+                /** this one is compatible for customer form */
+                if (e.key === "Enter" && txtField !== "#role") {
+                    $(nextTxtField).focus();
+
+                } else if (e.key === "Enter" && txtField === "#role") {
+                    saveCustomer();
+                    $(nextTxtField).focus();
+
+                } else {
+                    return false;
+                }
+
+            } else {
+                $(txtField).css('border', '3px solid red');
+            }
+        }
+    )
 }
