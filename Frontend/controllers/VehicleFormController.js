@@ -15,6 +15,7 @@ function saveVehicle() {
         url: baseURL + "save_vehicle", method: "post", data: formData, dataType: "json", success: function (res) {
             alert(res.message);
             getAllVehicle();
+            clearVehicleTxt();
         }, error: function (error) {
             var errorMessage = JSON.parse(error.responseText);
             alert(errorMessage.message);
@@ -88,6 +89,7 @@ $("#deleteVehicle").on('click', function () {
     $.ajax({
         url: baseURL + "?code=" + $("#vehicleId").val(), method: "delete", dataType: "json", success: function (resp) {
           getAllVehicle();
+          clearVehicleTxt();
             alert(resp.message);
         }, error: function (error) {
             alert(JSON.parse(error.responseText).message);
@@ -125,6 +127,7 @@ $("#updateVehicle").on('click', function () {
         dataType: "json",
         success: function (res) {
             getAllVehicle();
+            clearVehicleTxt();
             alert(res.message);
             // clearTextFields();
         }, error: function (error) {
@@ -176,3 +179,152 @@ function bindRowClickEventsVehicle() {
 
     });
 }
+
+function clearVehicleTxt(){
+    $('#vehicleId').val("");
+    $('#registrationNo').val("");
+    $('#vehicleBrand').val("");
+    $('#vehicleType').val("");
+    $('#fuelType').val("");
+    $('#numberOfPassenger').val("");
+    $('#vehicleColour').val("");
+    $('#transmissionType').val("");
+    $('#refundableDamagedFee').val("");
+    $('#vehicleMileage').val("");
+    $('#dailyRate').val("");
+    $('#monthlyMileage').val("");
+    $('#lastServiceMileage').val("");
+    $('#extraKmPer').val("");
+    $('#vehicleAvailability').val("");
+    $('#dailyMileage').val("");
+    $('#monthlyRate').val("");
+}
+
+function vehicleValidator(txtField, regXPattern, nextTxtField) {
+
+
+    $(txtField).on('keyup', function (e) {
+
+            if (regXPattern.test($(txtField).val())) {
+                $(txtField).css('border', '3px solid green');
+
+
+                if (e.key === "Enter" && txtField !== "#lastServiceMileage") {
+                    $(nextTxtField).focus();
+
+                } else if (e.key === "Enter" && txtField === "#lastServiceMileage") {
+                    saveVehicle();
+                    $(nextTxtField).focus();
+
+                } else {
+                    return false;
+                }
+
+            } else {
+                $(txtField).css('border', '3px solid red');
+            }
+        }
+    )
+}
+
+vehicleValidator(
+    '#vehicleId',
+    /^(V00-)[0-9]{1,4}$/,
+    '#numberOfPassenger'
+)
+
+vehicleValidator(
+    '#numberOfPassenger',
+    /^[0-9]{1,30}$/,
+    '#extraKmPer'
+)
+
+vehicleValidator(
+    '#extraKmPer',
+    /^[0-9]{2,30}$/,
+    '#registrationNo'
+)
+
+vehicleValidator(
+    '#registrationNo',
+    /^[0-9]{3,30}$/,
+    '#vehicleColour'
+)
+
+vehicleValidator(
+    '#vehicleColour',
+    /^[A-z]{3,30}$/,
+    '#dailyRate'
+)
+
+vehicleValidator(
+    '#dailyRate',
+    /^[0-9]{2,30}$/,
+    '#monthlyRate'
+)
+
+vehicleValidator(
+    '#monthlyRate',
+    /^[0-9]{2,30}$/,
+    '#vehicleAvailability'
+)
+
+vehicleValidator(
+    '#vehicleAvailability',
+    /^AVAILABLE | NOT_AVAILABLE$/,
+    '#vehicleBrand'
+)
+
+vehicleValidator(
+    '#vehicleBrand',
+    /^[A-z]{2,30}$/,
+    '#transmissionType'
+)
+
+vehicleValidator(
+    '#transmissionType',
+    /^AUTO | MANUAL$/,
+    '#dailyMileage'
+)
+
+vehicleValidator(
+    '#dailyMileage',
+    /^[0-9]{1,30}$/,
+    '#monthlyMileage'
+)
+
+vehicleValidator(
+    '#monthlyMileage',
+    /^[0-9]{2,30}$/,
+    '#fuelType'
+)
+
+vehicleValidator(
+    '#fuelType',
+    /^PETROL | DIESEL$/,
+    '#refundableDamagedFee'
+)
+
+vehicleValidator(
+    '#refundableDamagedFee',
+    /^[0-9]{2,30}$/,
+    '#vehicleType'
+)
+
+vehicleValidator(
+    '#vehicleType',
+    /^GENERAL | PREMIUM | LUXURY$/,
+    '#vehicleMileage'
+)
+
+vehicleValidator(
+    '#vehicleMileage',
+    /^[0-9]{2,30}$/,
+    '#lastServiceMileage'
+)
+
+vehicleValidator(
+    '#lastServiceMileage',
+    /^[0-9]{2,30}$/,
+    '#vehicleId'
+)

@@ -11,6 +11,7 @@ function saveAdmin() {
     $.ajax({
         url: baseURL + "save_admin", method: "post", data: formData, dataType: "json", success: function (res) {
             getAllAdmins();
+            clearAdminTex();
             alert(res.message);
         }, error: function (error) {
             var errorMessage = JSON.parse(error.responseText);
@@ -23,6 +24,7 @@ $("#deleteAdmin").on('click', function () {
     $.ajax({
         url: baseURL + "?code=" + $("#adminId").val(), method: "delete", dataType: "json", success: function (resp) {
             getAllAdmins();
+            clearAdminTex();
             alert(resp.message);
         }, error: function (error) {
             alert(JSON.parse(error.responseText).message);
@@ -50,6 +52,7 @@ $("#deleteAdmin").on('click', function () {
             dataType: "json",
             success: function (resp) {
                 getAllAdmins();
+                clearAdminTex();
                 alert(resp.message);
                 clearTextFields();
             }, error: function (error) {
@@ -114,16 +117,109 @@ function bindRowClickEventsForAdminTable() {
         let nic = $(this).children(":eq(7)").text();
         let id = $(this).children(":eq(8)").text();
 
-        $('#id').val(firstName);
+        $('#adminId').val(firstName);
         $('#firstName').val(lastName);
         $('#lastName').val(address);
-        $('#address').val(admin_contact);
-        $('#email').val(email);
-        $('#contactNo').val(username);
+        $('#adminAddress').val(admin_contact);
+        $('#adminEmail').val(email);
+        $('#adminContact').val(username);
         $('#userId').val(password);
         $('#password').val(nic);
-        $('#nic').val(id);
+        $('#adminNic').val(id);
 
     });
-
 }
+
+function clearAdminTex(){
+    $('#adminId').val("");
+    $('#firstName').val("");
+    $('#lastName').val("");
+    $('#adminAddress').val("");
+    $('#adminEmail').val("");
+    $('#adminContact').val("");
+    $('#userId').val("");
+    $('#password').val("");
+    $('#adminNic').val("");
+}
+
+function AdmValidator(txtField, regXPattern, nextTxtField) {
+
+
+    $(txtField).on('keyup', function (e) {
+
+            if (regXPattern.test($(txtField).val())) {
+                $(txtField).css('border', '3px solid green');
+
+
+                if (e.key === "Enter" && txtField !== "#adminId") {
+                    $(nextTxtField).focus();
+
+                } else if (e.key === "Enter" && txtField === "#adminId") {
+                    saveAdmin();
+                    clearAdminTex();
+                    $(nextTxtField).focus();
+
+                } else {
+                    return false;
+                }
+
+            } else {
+                $(txtField).css('border', '3px solid red');
+            }
+        }
+    )
+}
+
+AdmValidator(
+    '#firstName',
+    /^[A-z]{3,30}$/,
+    '#lastName'
+)
+
+AdmValidator(
+    '#lastName',
+    /^[A-z]{3,30}$/,
+    '#adminAddress'
+)
+
+AdmValidator(
+    '#adminAddress',
+    /^[A-z]{3,30}$/,
+    '#adminContact'
+)
+
+AdmValidator(
+    '#adminContact',
+    /^(07([1245678])|091)(-)[0-9]{7}$/,
+    '#adminEmail'
+)
+
+AdmValidator(
+    '#adminEmail',
+    /^[a-z]{3,30}@gmail.com$/,
+    '#userName'
+)
+
+AdmValidator(
+    '#userName',
+    /^[A-z]{3,30}$/,
+    '#password'
+)
+
+AdmValidator(
+    '#password',
+    /^[0-9]{3,30}$/,
+    '#adminNic'
+)
+
+AdmValidator(
+    '#adminNic',
+    /^[0-9]{3,30}$/,
+    '#adminId'
+)
+
+AdmValidator(
+    '#adminId',
+    /^(A00)[0-9]{1,4}$/,
+    '#firstName'
+)

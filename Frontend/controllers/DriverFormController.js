@@ -120,7 +120,7 @@ function bindRowClickEventsForDriver() {
         $('#drivingLicenseNo').val(drivingLicenseNo);
         $('#role').val(role);
         $('#userName').val(userNamme);
-        $('#driverAvailability').val(driverAvailability);
+        $('#driverAvailability').val(driverAvailability)
 
     });
 }
@@ -153,7 +153,7 @@ function driValidator(txtField, regXPattern, nextTxtField) {
                     $(nextTxtField).focus();
 
                 } else if (e.key === "Enter" && txtField === "#userId") {
-                    saveCustomer();
+                    saveDriver();
                     $(nextTxtField).focus();
 
                 } else {

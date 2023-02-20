@@ -134,7 +134,7 @@ function bindRowClickEvents() {
         $('#nic').val(nic);
         $('#drivingLicenseNo').val(drivingLicenseNo);
         $('#role').val(role);
-        $('#userId').val(userId);
+        $('#userId').val(userId)
 
     });
 }
