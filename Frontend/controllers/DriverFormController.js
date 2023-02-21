@@ -154,6 +154,7 @@ function driValidator(txtField, regXPattern, nextTxtField) {
 
                 } else if (e.key === "Enter" && txtField === "#userId") {
                     saveDriver();
+                    clearDriverTxt();
                     $(nextTxtField).focus();
 
                 } else {

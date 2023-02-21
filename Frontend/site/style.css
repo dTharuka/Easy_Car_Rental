@@ -48,7 +48,8 @@ header {
 }
 header.shadow {
   background: var(--bg-color);
-  box-shadow: 4px 4px 20px rgb(15 54 55 / 10%);
+  box-shadow: 4px 4px 20px rgb(15 54 55 );
+/*/10%  51 line eke kiyla thibba*/
   transition: 0.5s ease;
 }
 header.shadow #search-icon {
@@ -100,7 +101,9 @@ header.shadow #search-icon {
   right: 0;
   left: 0;
   background: var(--bg-color);
-  box-shadow: 4px 4px 20px rgb(15 54 55 / 10%);
+  box-shadow: 4px 4px 20px rgb(15 54 55 );
+  /*/10%  104 line eke kiyla thibba*/
+
   border: 1px solid var(--main-color);
   border-radius: 0.5rem;
   clip-path: circle(0% at 100% 0%);
@@ -423,7 +426,9 @@ header.shadow #search-icon {
     background: var(--bg-color);
     row-gap: 0.5rem;
     text-align: center;
-    box-shadow: 4px 4px 20px rgb(15 54 55 / 20%);
+    box-shadow: 4px 4px 20px rgb(15 54 55 );
+    /*/20%  429 line eke kiyla thibba*/
+
     clip-path: circle(0% at 0% 0%);
     transition: 0.6s;
   }

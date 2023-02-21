@@ -233,6 +233,7 @@ cusValidator(
 
                 } else if (e.key === "Enter" && txtField === "#role") {
                     saveCustomer();
+                    clearTextFields();
                     $(nextTxtField).focus();
 
                 } else {
