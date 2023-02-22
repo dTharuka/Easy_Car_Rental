@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Dakshina Rajapaksha Inc.</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
     <!-- Nucleo Icons -->
     <link href="../assets/css/nucleo-icons.css" rel="stylesheet"/>
@@ -15,10 +15,53 @@
     <link href="../assets/css/nucleo-svg.css" rel="stylesheet"/>
     <!-- CSS Files -->
     <link href="../assets/css/soft-ui-dashboard.css?v=1.0.7" id="pagestyle" rel="stylesheet"/>
+
+
 </head>
 <body>
 <div class="container-fluid py-4">
     <div class="row">
+
+
+
+        <div class="col-4 col-sm-2">
+            <form>
+                <label for="file">Profile Picture 01</label>
+                <input id="file" name="myFile" type="file" class="form-control">
+            </form>
+        </div>
+        <button type="button" id="btnUpload" class="btn btn-danger col-2" style="height: 40px">Upload File</button>
+
+
+        <div class="col-4 col-sm-2">
+            <form>
+                <label for="file">Profile Picture 02</label>
+                <input id="file2" name="myFile" type="file" class="form-control">
+            </form>
+        </div>
+
+        <div id="display" class="border border-1, w-25" style="height: 200px"></div>
+        <div id="display2" class="border border-1, w-25" style="height: 200px"></div>
+
+        <table class="table table-bordered table-hover">
+            <thead class="bg-info text-white">
+            <tr>
+                <th>Images1</th>
+                <th>Images2</th>
+            </tr>
+            </thead>
+            <tbody id="table">
+
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+
         <div class="col-8">
             <div class="card content-center">
                 <div class="card-body">
@@ -142,6 +185,64 @@
 <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
 <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
 <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+<script>
+
+    var imgArray=[];
+    var verify1;
+    var verify2;
+
+   $('#file').on("change", function (e) {
+       let file = e.target.files;
+       if (FileReader && file && file.length) {
+           let reader = new FileReader();
+           reader.onload = function () {
+               verify1=reader.result;
+               imgArray.push(reader.result);
+               $('#display').css({
+                   "background": `url(${reader.result})`,
+                   "background-size": "cover",
+                   "background-position": "center"
+               });
+           }
+           reader.readAsDataURL(file[0]);
+           // row.push(file[0]);
+       }
+   })
+
+   $('#file2').on("change", function (e) {
+       let file = e.target.files;
+       if (FileReader && file && file.length) {
+           let reader = new FileReader();
+           reader.onload = function () {
+               imgArray.push(reader.result);
+               $('#display2').css({
+                   "background": `url(${reader.result})`,
+                   "background-size": "cover",
+                   "background-position": "center"
+               });
+           }
+           reader.readAsDataURL(file[0]);
+           // row.push(file[0]);
+       }
+   })
+    let row;
+    $('#btnUpload').click(function (){
+
+            let first=imgArray[0];
+            let second=imgArray[1];
+
+            if(verify1!==first){
+                verify2=second;
+                second=first;
+                first=verify2;
+            }
+
+        row = `<tr><td><img src=${first} width="50px" height="50px"></td><td><img src=${second} width="50px" height="50px"></td></tr>`
+        $("#table").append(row);
+        imgArray.length=0;
+
+    });
+</script>
 
 </body>
 </html>
