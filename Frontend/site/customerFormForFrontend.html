@@ -43,7 +43,7 @@
         <div id="display" class="border border-1, w-25" style="height: 200px"></div>
         <div id="display2" class="border border-1, w-25" style="height: 200px"></div>
 
-        <table class="table table-bordered table-hover">
+        <table id="imageTable" class="table table-bordered table-hover">
             <thead class="bg-info text-white">
             <tr>
                 <th>Images1</th>
@@ -239,6 +239,10 @@
         $("#table").append(row);
         imgArray.length=0;
 
+    });
+
+    $('#saveCustomer').click(function (){
+        $('#imageTable>tbody').empty();
     });
 </script>
 
