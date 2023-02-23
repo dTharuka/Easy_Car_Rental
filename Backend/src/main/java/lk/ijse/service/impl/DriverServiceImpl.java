@@ -1,8 +1,8 @@
 package lk.ijse.service.impl;
 
 import lk.ijse.dto.DriverDTO;
-import lk.ijse.entity.Customer;
 import lk.ijse.entity.Driver;
+import lk.ijse.enums.AvailabilityType;
 import lk.ijse.repo.DriverRepo;
 import lk.ijse.service.DriverService;
 import org.modelmapper.ModelMapper;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +48,6 @@ public class DriverServiceImpl implements DriverService {
             throw new RuntimeException("Cannot find these customer id !");
         } else {
             driverRepo.save(modelMapper.map(driverDTO, Driver.class));
-
         }
     }
 
@@ -56,4 +56,11 @@ public class DriverServiceImpl implements DriverService {
         return modelMapper.map(driverRepo.findAll(), new TypeToken<ArrayList<DriverDTO>>() {
         }.getType());
     }
+
+    @Override
+    public long countDrivers() {
+        return driverRepo.count();
+    }
+
+
 }

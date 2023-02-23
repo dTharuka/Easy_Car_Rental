@@ -11,7 +11,6 @@ function saveAdmin() {
     $.ajax({
         url: baseURL + "save_admin", method: "post", data: formData, dataType: "json", success: function (res) {
             getAllAdmins();
-            clearAdminTex();
             alert(res.message);
         }, error: function (error) {
             var errorMessage = JSON.parse(error.responseText);
@@ -24,7 +23,6 @@ $("#deleteAdmin").on('click', function () {
     $.ajax({
         url: baseURL + "?code=" + $("#adminId").val(), method: "delete", dataType: "json", success: function (resp) {
             getAllAdmins();
-            clearAdminTex();
             alert(resp.message);
         }, error: function (error) {
             alert(JSON.parse(error.responseText).message);
@@ -32,37 +30,34 @@ $("#deleteAdmin").on('click', function () {
     });
 });
 
- $("#updateAdmin").on('click', function () {
-        var adminObj = {
-            adminId:$('#adminId').val(),//TODO check what can i do for this error
-            adminNic:$('#adminNic').val(),
-            adminName:{firstName: $('#firstName').val(),lastName:$('#lastName').val()},
-            adminAddress:$('#adminAddress').val(),
-            adminEmail:$('#adminEmail').val(),
-            adminContact:$('#adminContact').val(),
-            user:{userName: $('#userName').val()}
-
-        }
-
-        $.ajax({
-            url: baseURL + "update_admin",
-            method: "put",
-            contentType: "application/json",
-            data: JSON.stringify(adminObj),
-            dataType: "json",
-            success: function (resp) {
-                getAllAdmins();
-                clearAdminTex();
-                alert(resp.message);
-                clearTextFields();
-            }, error: function (error) {
-                alert(JSON.parse(error.responseText).message);
-            }
-        });
-    });
-
-
-
+// function getAllAdmins() {
+//     $("#adminTableBody").empty();
+//     $.ajax({
+//         url: baseURL + "get_all_admin", success: function (res) {
+//             for (let c of res.data) {
+//
+//                 let firstName = c.adminName.firstName;
+//                 let lastName = c.adminName.lastName;
+//                 let address = c.adminAddress;
+//                 let contact = c.adminContact;
+//                 let email = c.adminEmail;
+//                 let username = c.user.userName;
+//                 let password = c.user.password;
+//                 let nic = c.adminNic;
+//                 let id = c.adminId;
+//                 let role = c.user.role;
+//                 let userId = c.user.userId;
+//
+//                 let row = "<tr>" + "<td>" + firstName + "</td>" + "<td>" + lastName + "</td>" + "<td>" + address + "</td>" + "<td>" + contact + "</td>" + "<td>" + email + "</td>" + "<td>" + username + "</td>" + "<td>" + password + "</td>" + "<td>" + nic + "</td>" + "<td>" + id + "</td>" + "<td>" + role + "</td>" + "<td>" + userId + "</td>" + "</tr>";
+//                 $("#adminTableBody").append(row);
+//             }
+//             bindRowClickEventsForAdminTable();
+//         }, error: function (error) {
+//             let message = JSON.parse(error.responseText).message;
+//             alert(message);
+//         }
+//     });
+// }
 
 function getAllAdmins() {
     $("#adminTableBody").empty();
@@ -70,31 +65,19 @@ function getAllAdmins() {
         url: baseURL + "get_all_admin", success: function (res) {
             for (let c of res.data) {
 
-                let adminId = c.adminId;
-                let adminNic = c.adminNic;
-                let firstName = c.name.firstName;
-                let lastName = c.name.lastName;
-                let adminAddress = c.adminAddress;
-                let adminEmail = c.adminEmail;
-                let adminContact = c.adminContact;
-                let userName = c.user.userName;
+                let firstName = c.adminName.firstName;
+                let lastName = c.adminName.lastName;
+                let address = c.adminAddress;
+                let contact = c.adminContact;
+                let email = c.adminEmail;
+                let username = c.user.userName;
                 let password = c.user.password;
+                let nic = c.adminNic;
+                let id = c.adminId;
+                let role = c.user.role;
+                let userId = c.user.userId;
 
-
-                let row = "<tr>"
-                    + "<td>" + firstName + "</td>"
-                    + "<td>" + lastName + "</td>"
-                    + "<td>" + adminAddress + "</td>"
-                    + "<td>" + adminContact + "</td>"
-                    + "<td>" + adminEmail + "</td>"
-                    + "<td>" + userName + "</td>"
-                    + "<td>" + password + "</td>"
-                    + "<td>" + null + "</td>"
-                    + "<td>" + adminNic + "</td>"
-                    + "<td>" + adminId + "</td>"
-                    + "</tr>";
-
-                // let row = "<tr>" + "<td>" + firstName + "</td>" + "<td>" + lastName + "</td>" + "<td>" + address + "</td>" + "<td>" + contact + "</td>" + "<td>" + email + "</td>" + "<td>" + username + "</td>" + "<td>" + password + "</td>" + "<td>" + password + "</td>" + "<td>" + nic + "</td>" + "<td>" + id + "</td>" + "</tr>";
+                let row = "<tr>" + "<td>" + firstName + "</td>" + "<td>" + lastName + "</td>" + "<td>" + address + "</td>" + "<td>" + contact + "</td>" + "<td>" + email + "</td>" + "<td>" + username + "</td>" + "<td>" + password + "</td>" + "<td>" + nic + "</td>" + "<td>" + id + "</td>" + "<td>" + role + "</td>" + "<td>" + userId + "</td>" + "</tr>";
                 $("#adminTableBody").append(row);
             }
             bindRowClickEventsForAdminTable();
@@ -105,31 +88,74 @@ function getAllAdmins() {
     });
 }
 
+$("#updateAdmin").on('click', function () {
+
+    let firstName = $("#firstName").val();
+    let lastName = $("#lastName").val();
+    let address = $("#adminAddress").val();
+    let contact = $("#adminContact").val();
+    let email = $("#adminEmail").val();
+    let username = $("#userName").val();
+    let password = $("#password").val();
+    let nic = $("#adminNic").val();
+    let id = $("#adminId").val();
+    let role = $("#role").val();
+    let userId = $("#userId").val();
+
+    // var adminObj = {
+    //     name: {firstName: firstName, lastName: lastName},
+    //     address: address,
+    //     contact: contact,
+    //     email: email,
+    //     user: {username: username, password: password,role:role,userId:userId},
+    //     nic: nic,
+    //     id: id
+    // }
+
+    var adminObj = {
+        adminName: {firstName: firstName, lastName: lastName},
+        adminAddress: address,
+        adminContact: contact,
+        adminEmail: email,
+        user: {username: username, password: password, role: role, userId: userId},
+        adminNic: nic,
+        adminId: id
+    }
+
+    $.ajax({
+        url: baseURL + "update",
+        method: "put",
+        contentType: "application/json",
+        data: JSON.stringify(adminObj),
+        dataType: "json",
+        success: function (res) {
+            getAllAdmins();
+            alert(res.message);
+            clearTextFields();
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+
+});
+
+
 function bindRowClickEventsForAdminTable() {
     $("#adminTableBody>tr").on('click', function () {
-        let firstName = $(this).children(":eq(0)").text();
-        let lastName = $(this).children(":eq(1)").text();
-        let address = $(this).children(":eq(2)").text();
-        let admin_contact = $(this).children(":eq(3)").text();
-        let email = $(this).children(":eq(4)").text();
-        let username = $(this).children(":eq(5)").text();
-        let password = $(this).children(":eq(6)").text();
-        let nic = $(this).children(":eq(7)").text();
-        let id = $(this).children(":eq(8)").text();
-
-        $('#adminId').val(firstName);
-        $('#firstName').val(lastName);
-        $('#lastName').val(address);
-        $('#adminAddress').val(admin_contact);
-        $('#adminEmail').val(email);
-        $('#adminContact').val(username);
-        $('#userId').val(password);
-        $('#password').val(nic);
-        $('#adminNic').val(id);
-
+        $("#firstName").val($(this).children(":eq(0)").text());
+        $("#lastName").val($(this).children(":eq(1)").text());
+        $("#adminAddress").val($(this).children(":eq(2)").text());
+        $("#adminContact").val($(this).children(":eq(3)").text());
+        $("#adminEmail").val($(this).children(":eq(4)").text());
+        $("#userName").val($(this).children(":eq(5)").text());
+        $("#password").val($(this).children(":eq(6)").text());
+        $("#adminNic").val($(this).children(":eq(7)").text());
+        $("#adminId").val($(this).children(":eq(8)").text());
+        $("#role").val($(this).children(":eq(9)").text());
+        $("#userId").val($(this).children(":eq(10)").text());
     });
 }
-
 function clearAdminTex(){
     $('#adminId').val("");
     $('#firstName').val("");

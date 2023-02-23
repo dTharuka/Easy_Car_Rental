@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.jar.JarOutputStream;
+
 @RestController
 @CrossOrigin
 @RequestMapping("customer")
@@ -39,4 +41,16 @@ public class CustomerFormController {
         customerService.updateCustomer(customerDTO);
         return new ResponseUtil("OK", "Successfully updated ! " + customerDTO.getId(), "");
     }
+
+    @GetMapping(params = {"test"},produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil generateCustomersIds(@RequestParam String test) {
+        return new ResponseUtil("Ok", "", customerService.generateCustomerIds());
+    }
+
+    @GetMapping(path ="/customerCount/{count}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil countCustomers(@PathVariable String count){
+//        System.out.println(count);
+        return new ResponseUtil("Ok", "Ok", customerService.countCustomer());
+    }
+
 }

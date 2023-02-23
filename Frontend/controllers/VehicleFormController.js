@@ -327,3 +327,63 @@ vehicleValidator(
     /^[0-9]{2,30}$/,
     '#vehicleId'
 )
+
+$('#car1').on("change", function (e) {
+    let file = e.target.files;
+    if (FileReader && file && file.length) {
+        let reader = new FileReader();
+        reader.onload = function () {
+            $('#frontImg').css({
+                "background": `url(${reader.result})`,
+                "background-size": "cover",
+                "background-position": "center"
+            });
+        }
+        reader.readAsDataURL(file[0]);
+    }
+})
+
+$('#car2').on("change", function (e) {
+    let file = e.target.files;
+    if (FileReader && file && file.length) {
+        let reader = new FileReader();
+        reader.onload = function () {
+            $('#backImg').css({
+                "background": `url(${reader.result})`,
+                "background-size": "cover",
+                "background-position": "center"
+            });
+        }
+        reader.readAsDataURL(file[0]);
+    }
+})
+
+$('#car3').on("change", function (e) {
+    let file = e.target.files;
+    if (FileReader && file && file.length) {
+        let reader = new FileReader();
+        reader.onload = function () {
+            $('#sideImg').css({
+                "background": `url(${reader.result})`,
+                "background-size": "cover",
+                "background-position": "center"
+            });
+        }
+        reader.readAsDataURL(file[0]);
+    }
+})
+
+$('#car4').on("change", function (e) {
+    let file = e.target.files;
+    if (FileReader && file && file.length) {
+        let reader = new FileReader();
+        reader.onload = function () {
+            $('#innerImg').css({
+                "background": `url(${reader.result})`,
+                "background-size": "cover",
+                "background-position": "center"
+            });
+        }
+        reader.readAsDataURL(file[0]);
+    }
+})

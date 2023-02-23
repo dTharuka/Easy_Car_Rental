@@ -1,11 +1,7 @@
 package lk.ijse.service.impl;
 
-import lk.ijse.dto.CustomerDTO;
-import lk.ijse.dto.DriverDTO;
 import lk.ijse.dto.VehicleDTO;
-import lk.ijse.entity.Customer;
 import lk.ijse.entity.Vehicle;
-import lk.ijse.repo.CustomerRepo;
 import lk.ijse.repo.VehicleRepo;
 import lk.ijse.service.VehicleService;
 import org.modelmapper.ModelMapper;
@@ -44,17 +40,22 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public void updateVehicle(VehicleDTO vehicleDTO) {
-        if (vehicleRepo.existsById(vehicleDTO.getVehicleId())) {
-            vehicleRepo.save(modelMapper.map(vehicleDTO, Vehicle.class));
+        if (!vehicleRepo.existsById(vehicleDTO.getVehicleId())) {
+            throw new RuntimeException("Cannot find these vehicle id !");
         } else {
-            throw new RuntimeException("Cannot find these Vehicle id !");
+            vehicleRepo.save(modelMapper.map(vehicleDTO, Vehicle.class));
+
         }
     }
-
 
     @Override
     public List<VehicleDTO> getAllVehicle() {
         return modelMapper.map(vehicleRepo.findAll(), new TypeToken<ArrayList<VehicleDTO>>() {
         }.getType());
+    }
+
+    @Override
+    public long countVehicle() {
+        return vehicleRepo.count();
     }
 }

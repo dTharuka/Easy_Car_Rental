@@ -1,8 +1,6 @@
 package lk.ijse.controller;
 
-import lk.ijse.dto.CustomerDTO;
 import lk.ijse.dto.DriverDTO;
-import lk.ijse.service.CustomerService;
 import lk.ijse.service.DriverService;
 import lk.ijse.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +35,14 @@ public class DriverFormController {
     }
 
     @PutMapping(value = "update")
-    public ResponseUtil updateCustomer(@RequestBody DriverDTO driverDTO) {
+    public ResponseUtil updateDriver(@RequestBody DriverDTO driverDTO) {
         driverService.updateDriver(driverDTO);
         return new ResponseUtil("OK", "Successfully updated ! " + driverDTO.getId(), "");
     }
+
+    @GetMapping(path ="/driverCount/{count}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil countDrivers(@PathVariable String count){
+        return new ResponseUtil("Ok", "", driverService.countDrivers());
+    }
+
 }

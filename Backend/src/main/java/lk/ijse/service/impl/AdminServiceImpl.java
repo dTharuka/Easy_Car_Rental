@@ -32,12 +32,14 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
+
     @Override
     public void updateAdmin(AdminDTO adminDTO) {
-        if (adminRepo.existsById(adminDTO.getAdminId())) {
-            adminRepo.save(modelMapper.map(adminDTO, Admin.class));
+
+        if (!adminRepo.existsById(adminDTO.getAdminId())) {
+            throw new RuntimeException("Cannot find these customer id !");
         } else {
-            throw new RuntimeException("Cannot find these Admin id !");
+            adminRepo.save(modelMapper.map(adminDTO, Admin.class));
         }
     }
 

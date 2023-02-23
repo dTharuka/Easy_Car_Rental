@@ -54,4 +54,28 @@ public class CustomerServiceImpl implements CustomerService {
         return modelMapper.map(customerRepo.findAll(), new TypeToken<ArrayList<CustomerDTO>>() {
         }.getType());
     }
+
+    @Override
+    public String generateCustomerIds() {
+        String id = customerRepo.generateCustomerId();
+        if (id != null) {
+            int tempId = Integer.
+                    parseInt(id.split("-")[1]);
+            tempId = tempId + 1;
+            if (tempId <= 9) {
+                return "C00-00" + tempId;
+            } else if (tempId <= 99) {
+                return "C00-0" + tempId;
+            } else {
+                return "C00-" + tempId;
+            }
+        } else {
+            return "C00-001";
+        }
+    }
+
+    @Override
+    public long countCustomer() {
+        return customerRepo.count();
+    }
 }
