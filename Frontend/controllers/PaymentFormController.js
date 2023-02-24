@@ -4,6 +4,8 @@ getAllPaymentDetails();
 
 
 $("#save").on('click', function () {
+
+
     let formData = $("#paymentForm").serialize();
 
     $.ajax({
@@ -31,8 +33,8 @@ function getAllPaymentDetails() {
 
                 let payment_id = c.paymentId;
                 let invoice_no = c.invoiceNo;
-                let date = c.booking.returnDate;
-                let booking_id = c.booking.bookingId;
+                let date = c.paymentDate;
+                let booking_id = c.bookingId;
                 let payment_type = c.paymentType;
                 let amount = c.amount;
 

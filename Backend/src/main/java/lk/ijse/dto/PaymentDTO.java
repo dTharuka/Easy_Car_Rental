@@ -23,4 +23,5 @@ public class PaymentDTO {
     private PaymentType paymentType;
     private BookingDTO booking;
 
+
 }
