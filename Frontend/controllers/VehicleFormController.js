@@ -99,6 +99,43 @@ $("#deleteVehicle").on('click', function () {
 
 $("#updateVehicle").on('click', function () {
 
+    alert("hello");
+
+    // var vehicleObj = {
+    //     vehicleId:$('#vehicleId').val(),//TODO check what can i do for this error
+    //     registrationNo:$('#registrationNo').val(),
+    //     vehicleBrand:$('#vehicleBrand').val(),
+    //     vehicleType:$('#vehicleType').val(),
+    //     fuelType:$('#fuelType').val(),
+    //     numberOfPassenger:$('#numberOfPassenger').val(),
+    //     vehicleColour:$('#vehicleColour').val(),
+    //     transmissionType:$('#transmissionType').val(),
+    //     refundableDamagedFee:$('#refundableDamagedFee').val(),
+    //     vehicleMileage: $('#vehicleMileage').val(),
+    //     vehiclePriceRate: {dailyRate: $('#dailyRate').val(),monthlyRate: $('#monthlyRate').val()},//TODO check what can i do for this error
+    //     freeMileage: {monthlyMileage: $('#monthlyMileage').val(),dailyMileage: $('#dailyMileage').val()},//TODO check what can i do for this error
+    //     lastServiceMileage:$('#lastServiceMileage').val(),
+    //     extraKmPer:$('#extraKmPer').val(),
+    //     vehicleAvailability:$('#vehicleAvailability').val()
+    //     // needMaintenance:$('#extraKmPer').val()
+    // }
+    //
+    // $.ajax({
+    //     url: baseURL + "update_vehicle",
+    //     method: "put",
+    //     contentType: "application/json",
+    //     data: JSON.stringify(vehicleObj),
+    //     dataType: "json",
+    //     success: function (res) {
+    //         getAllVehicle();
+    //         clearVehicleTxt();
+    //         alert(res.message);
+    //         // clearTextFields();
+    //     }, error: function (error) {
+    //         alert(JSON.parse(error.responseText).message);
+    //     }
+    // });
+
     var vehicleObj = {
         vehicleId:$('#vehicleId').val(),//TODO check what can i do for this error
         registrationNo:$('#registrationNo').val(),
@@ -118,8 +155,9 @@ $("#updateVehicle").on('click', function () {
         // needMaintenance:$('#extraKmPer').val()
     }
 
+
     $.ajax({
-        url: baseURL + "update_vehicle",
+        url: baseURL + "update",
         method: "put",
         contentType: "application/json",
         data: JSON.stringify(vehicleObj),
@@ -133,6 +171,8 @@ $("#updateVehicle").on('click', function () {
             alert(JSON.parse(error.responseText).message);
         }
     });
+
+
 });
 
 function bindRowClickEventsVehicle() {

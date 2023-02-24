@@ -40,13 +40,13 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public void updateVehicle(VehicleDTO vehicleDTO) {
-        if (!vehicleRepo.existsById(vehicleDTO.getVehicleId())) {
-            throw new RuntimeException("Cannot find these vehicle id !");
-        } else {
+        if (vehicleRepo.existsById(vehicleDTO.getVehicleId())) {
             vehicleRepo.save(modelMapper.map(vehicleDTO, Vehicle.class));
-
+        } else {
+            throw new RuntimeException("Cannot find these Vehicle id !");
         }
     }
+
 
     @Override
     public List<VehicleDTO> getAllVehicle() {
