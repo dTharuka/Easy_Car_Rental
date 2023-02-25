@@ -648,6 +648,9 @@
     var verify1;
     var verify2;
 
+    //file reader obj
+    const reader = new FileReader();
+
     $('#file').on("change", function (e) {
         let file = e.target.files;
         if (FileReader && file && file.length) {
@@ -663,6 +666,7 @@
             }
             reader.readAsDataURL(file[0]);
         }
+
     })
 
     $('#file2').on("change", function (e) {
@@ -679,6 +683,7 @@
             }
             reader.readAsDataURL(file[0]);
         }
+
     })
     let row;
     $('#btnUpload').click(function (){
@@ -696,11 +701,48 @@
         $("#table").append(row);
         imgArray.length=0;
 
+        //=========== save nic/dl image on local storage (web) ============
+        const nicDlImageFile = document.getElementById('file');
+
+        // Get file from input element
+        const imgFile = nicDlImageFile.files[0];
+        reader.readAsDataURL(imgFile);
+
+        reader.addEventListener('load', () => {
+            //get converted url
+            const url = reader.result
+
+            // add image to localStorage (save image)
+            localStorage.setItem("1stPhoto", url);
+        });
+
+
     });
 
     $('#saveCustomer').click(function (){
         $('#imageTable>tbody').empty();
+
+        const nicDlImageFile = document.getElementById('file2');
+
+        // Get file from input element
+        const imgFile = nicDlImageFile.files[0];
+        reader.readAsDataURL(imgFile);
+
+        reader.addEventListener('load', () => {
+            //get converted url
+            const url = reader.result
+
+            // add image to localStorage (save image)
+            localStorage.setItem("2stPhoto", url);
+        });
     });
+
+
+
+
+
+
+
 
 
 
