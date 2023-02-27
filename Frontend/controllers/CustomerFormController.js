@@ -1,7 +1,10 @@
 let baseURL = "http://localhost:8080/Backend_war";
 
 getAllCustomers();
-genarateID();
+// genarateID();
+let cusIdOG ;
+let corntNumber;
+let getSplitId;
 $("#saveCustomer").on('click', function () {
     saveCustomer();
 });
@@ -25,6 +28,8 @@ function saveCustomer() {
 }
 
 $("#updateCustomer").on('click', function () {
+
+    alert(cusIdOG);
 
     let id = $('#id').val();
     let firstName = $('#firstName').val();
@@ -83,11 +88,23 @@ $("#deleteCustomer").on('click', function () {
     });
 });
 
+
+
+function genarateCusID() {
+     getSplitId=cusIdOG.split("-");
+    corntNumber=getSplitId[1];
+     let count=parseInt(corntNumber);
+     $('#id').val("C00-"+(count+1));
+}
+
+
 function getAllCustomers() {
     $("#customerTableBody").empty();
     $.ajax({
         url: baseURL + "/customer/get_all", success: function (res) {
             for (let c of res.data) {
+
+                cusIdOG=c.id;
 
                 let id = c.id;
                 let firstName = c.name.firstName;
@@ -108,6 +125,8 @@ function getAllCustomers() {
             }
             bindRowClickEvents();
             clearTextFields();
+            genarateCusID();
+            // alert(c);
         }, error: function (error) {
             let message = JSON.parse(error.responseText).message;
             alert(message);
@@ -115,17 +134,6 @@ function getAllCustomers() {
     });
 }
 
-function genarateID() {
-    $("#customerTableBody").empty();
-    $.ajax({
-        url: baseURL + "/customer/?test=", success: function (res) {
-            $('#id').val(res.data.id);
-        }, error: function (error) {
-            let message = JSON.parse(error.responseText).message;
-            alert(message);
-        }
-    });
-}
 
 function bindRowClickEvents() {
     $("#customerTableBody>tr").on('click', function () {
@@ -266,7 +274,7 @@ $("#placeBookingBtn").on('click', function () {
 
 cusValidator(
     '#id',
-    /^(C00-00)[0-9]{1,4}$/,
+    /^(C00-)[0-9]{1,4}$/,
     '#firstName'
 )
 
