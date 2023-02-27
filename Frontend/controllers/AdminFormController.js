@@ -23,6 +23,7 @@ function saveAdmin() {
 $("#deleteAdmin").on('click', function () {
     $.ajax({
         url: baseURL + "?code=" + $("#adminId").val(), method: "delete", dataType: "json", success: function (resp) {
+            clearAdminTex();
             getAllAdmins();
             alert(resp.message);
         }, error: function (error) {
