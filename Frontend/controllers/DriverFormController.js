@@ -1,6 +1,9 @@
 let baseURL = "http://localhost:8080/Backend_war/driver/";
 
 getAllDrivers();
+let driIdOG ;
+let corntDriNumber;
+let driSplitNumber;
 
 $("#saveDriver").on('click', function () {
     saveDriver();
@@ -20,12 +23,21 @@ function saveDriver() {
     });
 }
 
+
+function genarateDriID() {
+    driSplitNumber=driIdOG.split("-");
+    corntDriNumber=driSplitNumber[1];
+    let count=parseInt(corntDriNumber);
+    $('#id').val("D00-"+(count+1));
+}
+
 function getAllDrivers() {
     $("#driverTableBody").empty();
     $.ajax({
         url: baseURL + "get_all", success: function (res) {
             for (let c of res.data) {
 
+                driIdOG=c.id;
                 let id = c.id;
                 let firstname = c.name.firstName;
                 let lastname = c.name.lastName;
@@ -44,7 +56,10 @@ function getAllDrivers() {
                 $("#driverTableBody").append(row);
             }
 
-            bindRowClickEventsForDriver();            // clearTextFields();
+            bindRowClickEventsForDriver();
+            // clearTextFields();
+                genarateDriID();
+
         }, error: function (error) {
             let message = JSON.parse(error.responseText).message;
             alert(message);
@@ -170,7 +185,7 @@ function driValidator(txtField, regXPattern, nextTxtField) {
 
 driValidator(
     '#id',
-    /^(D00)[0-9]{1,4}$/,
+    /^(D00-)[0-9]{1,4}$/,
     '#address'
 )
 

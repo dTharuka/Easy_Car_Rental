@@ -4,6 +4,9 @@ let baseURL = "http://localhost:8080/Backend_war/vehicle/";
 
 
 getAllVehicle();
+let vehiclceOID ;
+let availableVehiID;
+let splitVehiId;
 
 $("#saveVehicle").on('click', function () {
     saveVehicle();
@@ -22,12 +25,21 @@ function saveVehicle() {
         }
     });
 }
+
+function genarateVehiID() {
+    splitVehiId=vehiclceOID.split("-");
+    availableVehiID=splitVehiId[1];
+    let count=parseInt(availableVehiID);
+    $('#vehicleId').val("V00-"+(count+1));
+}
+
 function getAllVehicle() {
     $("#vehicleTableBody").empty();
     $.ajax({
         url: baseURL + "get_all", success: function (res) {
             for (let c of res.data) {
 
+                vehiclceOID=c.vehicleId;
                 let vehicleId = c.vehicleId;
                 let noOfPassengers = c.numberOfPassenger;
                 let extraKmPrice = c.extraKmPer;
@@ -75,6 +87,7 @@ function getAllVehicle() {
                 $("#vehicleTableBody").append(row);
             }
             bindRowClickEventsVehicle();
+            genarateVehiID();
         }, error: function (error) {
             let message = JSON.parse(error.responseText).message;
             alert(message);
