@@ -8,6 +8,7 @@ $("#saveAdmin").on('click', function () {
 
 function saveAdmin() {
     let formData = $("#adminFormController").serialize();
+    alert(formData.lastName);
     $.ajax({
         url: baseURL + "save_admin", method: "post", data: formData, dataType: "json", success: function (res) {
             getAllAdmins();
@@ -64,7 +65,7 @@ function getAllAdmins() {
     $.ajax({
         url: baseURL + "get_all_admin", success: function (res) {
             for (let c of res.data) {
-
+//adminName
                 let firstName = c.adminName.firstName;
                 let lastName = c.adminName.lastName;
                 let address = c.adminAddress;
