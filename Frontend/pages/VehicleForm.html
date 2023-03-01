@@ -179,22 +179,35 @@
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="input-group">
-                        <span class="input-group-text text-body"><i aria-hidden="true" class="fas fa-search"></i></span>
-                        <input class="form-control" placeholder="Type here..." type="text">
+                        <select class="form-control" id="searchDropBox" name="searchType">
+                            <option>Search By</option>
+                            <option>PASSENGERS</option>
+                            <option>TRANSMISSION</option>
+                            <option>BRAND</option>
+                            <option>TYPE</option>
+                            <option>PRICE</option>
+                            <option>FUEL</option>
+                        </select>
                     </div>
+                    <div class="input-group">
+                        <span class="input-group-text text-body"><i aria-hidden="true" class="fas fa-search"></i></span>
+                        <input class="form-control" id="vehicleSearch" placeholder="Type here..." type="text">
+                    </div>
+                    <button class="btn btn-primary bg-success" style="margin-top: 11px !important;" id="search" type="button">Search
+                    </button>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
-                    <li class="nav-item d-flex align-items-center">
-                        <a class="btn btn-outline-primary btn-sm mb-0 me-3"
-                           href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard"
-                           target="_blank">Online Builder</a>
-                    </li>
-                    <li class="nav-item d-flex align-items-center">
-                        <a class="nav-link text-body font-weight-bold px-0" href="javascript:">
-                            <i class="fa fa-user me-sm-1"></i>
-                            <span class="d-sm-inline d-none">Sign In</span>
-                        </a>
-                    </li>
+<!--                    <li class="nav-item d-flex align-items-center">-->
+<!--                        <a class="btn btn-outline-primary btn-sm mb-0 me-3"-->
+<!--                           href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard"-->
+<!--                           target="_blank">Online Builder</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item d-flex align-items-center">-->
+<!--                        <a class="nav-link text-body font-weight-bold px-0" href="javascript:">-->
+<!--                            <i class="fa fa-user me-sm-1"></i>-->
+<!--                            <span class="d-sm-inline d-none">Sign In</span>-->
+<!--                        </a>-->
+<!--                    </li>-->
                     <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                         <a class="nav-link text-body p-0" href="javascript:" id="iconNavbarSidenav">
                             <div class="sidenav-toggler-inner">
@@ -746,3 +759,25 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

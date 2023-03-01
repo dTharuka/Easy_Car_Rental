@@ -8,6 +8,8 @@ let vehiclceOID ;
 let availableVehiID;
 let splitVehiId;
 
+let vehicleSearchArray=[];
+
 $("#saveVehicle").on('click', function () {
     saveVehicle();
 });
@@ -64,6 +66,27 @@ function getAllVehicle() {
 
 
 
+                var temp={
+                    seaVehicleId:c.vehicleId,
+                    seaNoOfPassengers:c.numberOfPassenger,
+                    seaExtraKmPrice:c.extraKmPer,
+                    seaRegistrationNo:c.registrationNo,
+                    seaColour:c.vehicleColour,
+                    seaDaily_amount:c.vehiclePriceRate.dailyRate,
+                    seaMonthly_amount:c.vehiclePriceRate.monthlyRate,
+                    seaAvailability:c.vehicleAvailability,
+                    seaBrand:c.vehicleBrand,
+                    seaTransmission:c.transmissionType,
+                    seaDaily_km:c.freeMileage.dailyMileage,
+                    seaMonthly_km:c.freeMileage.monthlyMileage,
+                    seaFuelType:c.fuelType,
+                    seaDamageFee:c.refundableDamagedFee,
+                    seaVehicleType:c.vehicleType,
+                    seaService_milage:c.vehicleMileage,
+                    seaLast_service:c.lastServiceMileage
+                };
+
+
                 let row = "<tr>"
                     + "<td>" + vehicleId + "</td>"
                     + "<td>" + noOfPassengers + "</td>"
@@ -85,6 +108,7 @@ function getAllVehicle() {
                     + "</tr>";
 
                 $("#vehicleTableBody").append(row);
+                vehicleSearchArray.push(temp);
             }
             bindRowClickEventsVehicle();
             genarateVehiID();
@@ -111,9 +135,6 @@ $("#deleteVehicle").on('click', function () {
 });
 
 $("#updateVehicle").on('click', function () {
-
-    alert("hello");
-
     // var vehicleObj = {
     //     vehicleId:$('#vehicleId').val(),//TODO check what can i do for this error
     //     registrationNo:$('#registrationNo').val(),
@@ -440,3 +461,445 @@ $('#car4').on("change", function (e) {
         reader.readAsDataURL(file[0]);
     }
 })
+
+
+// $("#search").on('click', function () {
+//     let searchType = $("#searchDropBox").val();
+//     if ("PASSENGERS" === searchType) {
+//         searchByPassengerCount();
+//     } else if ("TRANSMISSION" === searchType) {
+//         searchByTransMissionType();
+//     } else if ("BRAND" === searchType) {
+//         searchByBrand();
+//     } else if ("TYPE" === searchType) {
+//         searchByType();
+//     } else if ("PRICE" === searchType) {
+//         searchByRate();
+//     } else if ("FUEL" === searchType) {
+//         searchByFuelType();
+//     } else {
+//         alert("fuck u idiot !");
+//     }
+// });
+
+function searchByPassengerCount() {
+    $("#vehicleTableBody").empty();
+
+    $.ajax({
+        url: baseURL + "searching/?no_of_passengers=" + $("#vehicleSearch").val(),
+        method: "GET",
+        dataType: "json",
+        success: function (resp) {
+            for (let c of resp.data) {
+                vehicleSearchManager(c);
+            }
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
+
+function searchByFuelType() {
+    $("#vehicleTableBody").empty();
+
+    $.ajax({
+        url: baseURL + "searching/?fuel_type=" + $("#vehicleSearch").val(),
+        method: "GET",
+        dataType: "json",
+        success: function (resp) {
+            for (let c of resp.data) {
+                vehicleSearchManager(c);
+            }
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
+
+function searchByBrand() {
+    $("#vehicleTableBody").empty();
+
+    $.ajax({
+        url: baseURL + "searching/?brand=" + $("#vehicleSearch").val(),
+        method: "GET",
+        dataType: "json",
+        success: function (resp) {
+            for (let c of resp.data) {
+                vehicleSearchManager(c);
+            }
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
+
+function searchByType() {
+    $("#vehicleTableBody").empty();
+
+    $.ajax({
+        url: baseURL + "searching/?type=" + $("#vehicleSearch").val(),
+        method: "GET",
+        dataType: "json",
+        success: function (resp) {
+            for (let c of resp.data) {
+                vehicleSearchManager(c);
+            }
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
+
+function searchByTransMissionType() {
+    $("#vehicleTableBody").empty();
+
+    $.ajax({
+        url: baseURL + "searching/?transmission_type=" + $("#vehicleSearch").val(),
+        method: "GET",
+        dataType: "json",
+        success: function (resp) {
+            for (let c of resp.data) {
+                vehicleSearchManager(c);
+            }
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
+
+function searchByRate() {
+    $("#vehicleTableBody").empty();
+    $.ajax({
+        url: baseURL + "searching/?dailyRate=" + $("#vehicleSearch").val() + "&monthlyRate=" + $("#vehicleSearch").val(),
+        method: "GET",
+        dataType: "json",
+        success: function (resp) {
+            for (let c of resp.data) {
+                vehicleSearchManager(c);
+            }
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
+
+
+
+
+function vehicleSearchManager(c) {
+    let vehicleId = c.vehicleId;
+    let registrationNo = c.registrationNo;
+    let brand = c.vehicleBrand;
+    let vehicleType = c.vehicleType;
+    let fuelType = c.fuelType;
+    let noOfPassengers = c.numberOfPassenger;
+    let Colour = c.vehicleColour;
+    let transmission = c.transmissionType;
+    let damageFee = c.refundableDamagedFee;
+    let service_milage = c.vehicleMileage;
+    let daily_amount = c.vehiclePriceRate.dailyRate;
+    let monthly_amount = c.vehiclePriceRate.monthlyRate;
+    let daily_km = c.freeMileage.dailyMileage;
+    let monthly_km = c.freeMileage.monthlyMileage;
+    let last_service = c.lastServiceMileage;
+    let extraKmPrice = c.extraKmPer;
+    let Availability = c.vehicleAvailability;
+
+    let row = "<tr>"
+        + "<td>" + vehicleId + "</td>"
+        + "<td>" + noOfPassengers + "</td>"
+        + "<td>" + extraKmPrice + "</td>"
+        + "<td>" + registrationNo + "</td>"
+        + "<td>" + Colour + "</td>"
+        + "<td>" + daily_amount + "</td>"
+        + "<td>" + monthly_amount + "</td>"
+        + "<td>" + Availability + "</td>"
+        + "<td>" + brand + "</td>"
+        + "<td>" + transmission + "</td>"
+        + "<td>" + daily_km + "</td>"
+        + "<td>" + monthly_km + "</td>"
+        + "<td>" + fuelType + "</td>"
+        + "<td>" + damageFee + "</td>"
+        + "<td>" + vehicleType + "</td>"
+        + "<td>" + service_milage + "</td>"
+        + "<td>" + last_service + "</td>"
+        + "</tr>";
+
+    $("#vehicleTableBody").append(row);
+
+}
+
+$('#search').click(function (){
+    $("#vehicleTableBody").empty();
+    let searchKey=$('#searchDropBox').val();
+    let searchTxt=$('#vehicleSearch').val();
+    for(var s=0;s<vehicleSearchArray.length;s++){
+        let takeVal=vehicleSearchArray[s];
+        if(takeVal.seaBrand === searchTxt && searchKey === "BRAND"){
+
+
+            let vehicleId = takeVal.seaVehicleId;
+            let noOfPassengers = takeVal.seaNoOfPassengers;
+            let extraKmPrice = takeVal.seaExtraKmPrice;
+            let registrationNo = takeVal.seaRegistrationNo;
+            let Colour = takeVal.seaColour;
+            let daily_amount = takeVal.seaDaily_amount;
+            let monthly_amount = takeVal.seaMonthly_amount;
+            let Availability = takeVal.seaAvailability;
+            let brand = takeVal.seaBrand;
+            let transmission = takeVal.seaTransmission;
+            let daily_km = takeVal.seaDaily_km;
+            let monthly_km = takeVal.seaMonthly_km;
+            let fuelType = takeVal.seaFuelType;
+            let damageFee = takeVal.seaDamageFee;
+            let vehicleType = takeVal.seaVehicleType;
+            let service_milage = takeVal.seaService_milage;
+            let last_service = takeVal.seaLast_service;
+            let row = "<tr>"
+                + "<td>" + vehicleId + "</td>"
+                + "<td>" + noOfPassengers + "</td>"
+                + "<td>" + extraKmPrice + "</td>"
+                + "<td>" + registrationNo + "</td>"
+                + "<td>" + Colour + "</td>"
+                + "<td>" + daily_amount + "</td>"
+                + "<td>" + monthly_amount + "</td>"
+                + "<td>" + Availability + "</td>"
+                + "<td>" + brand + "</td>"
+                + "<td>" + transmission + "</td>"
+                + "<td>" + daily_km + "</td>"
+                + "<td>" + monthly_km + "</td>"
+                + "<td>" + fuelType + "</td>"
+                + "<td>" + damageFee + "</td>"
+                + "<td>" + vehicleType + "</td>"
+                + "<td>" + service_milage + "</td>"
+                + "<td>" + last_service + "</td>"
+                + "</tr>";
+
+            $("#vehicleTableBody").append(row);
+        }
+
+        if(takeVal.seaNoOfPassengers === parseInt(searchTxt) && searchKey === "PASSENGERS"){
+
+
+            let vehicleId = takeVal.seaVehicleId;
+            let noOfPassengers = takeVal.seaNoOfPassengers;
+            let extraKmPrice = takeVal.seaExtraKmPrice;
+            let registrationNo = takeVal.seaRegistrationNo;
+            let Colour = takeVal.seaColour;
+            let daily_amount = takeVal.seaDaily_amount;
+            let monthly_amount = takeVal.seaMonthly_amount;
+            let Availability = takeVal.seaAvailability;
+            let brand = takeVal.seaBrand;
+            let transmission = takeVal.seaTransmission;
+            let daily_km = takeVal.seaDaily_km;
+            let monthly_km = takeVal.seaMonthly_km;
+            let fuelType = takeVal.seaFuelType;
+            let damageFee = takeVal.seaDamageFee;
+            let vehicleType = takeVal.seaVehicleType;
+            let service_milage = takeVal.seaService_milage;
+            let last_service = takeVal.seaLast_service;
+            let row = "<tr>"
+                + "<td>" + vehicleId + "</td>"
+                + "<td>" + noOfPassengers + "</td>"
+                + "<td>" + extraKmPrice + "</td>"
+                + "<td>" + registrationNo + "</td>"
+                + "<td>" + Colour + "</td>"
+                + "<td>" + daily_amount + "</td>"
+                + "<td>" + monthly_amount + "</td>"
+                + "<td>" + Availability + "</td>"
+                + "<td>" + brand + "</td>"
+                + "<td>" + transmission + "</td>"
+                + "<td>" + daily_km + "</td>"
+                + "<td>" + monthly_km + "</td>"
+                + "<td>" + fuelType + "</td>"
+                + "<td>" + damageFee + "</td>"
+                + "<td>" + vehicleType + "</td>"
+                + "<td>" + service_milage + "</td>"
+                + "<td>" + last_service + "</td>"
+                + "</tr>";
+
+            $("#vehicleTableBody").append(row);
+        }
+
+        if(takeVal.seaTransmission === searchTxt && searchKey === "TRANSMISSION"){
+
+
+            let vehicleId = takeVal.seaVehicleId;
+            let noOfPassengers = takeVal.seaNoOfPassengers;
+            let extraKmPrice = takeVal.seaExtraKmPrice;
+            let registrationNo = takeVal.seaRegistrationNo;
+            let Colour = takeVal.seaColour;
+            let daily_amount = takeVal.seaDaily_amount;
+            let monthly_amount = takeVal.seaMonthly_amount;
+            let Availability = takeVal.seaAvailability;
+            let brand = takeVal.seaBrand;
+            let transmission = takeVal.seaTransmission;
+            let daily_km = takeVal.seaDaily_km;
+            let monthly_km = takeVal.seaMonthly_km;
+            let fuelType = takeVal.seaFuelType;
+            let damageFee = takeVal.seaDamageFee;
+            let vehicleType = takeVal.seaVehicleType;
+            let service_milage = takeVal.seaService_milage;
+            let last_service = takeVal.seaLast_service;
+            let row = "<tr>"
+                + "<td>" + vehicleId + "</td>"
+                + "<td>" + noOfPassengers + "</td>"
+                + "<td>" + extraKmPrice + "</td>"
+                + "<td>" + registrationNo + "</td>"
+                + "<td>" + Colour + "</td>"
+                + "<td>" + daily_amount + "</td>"
+                + "<td>" + monthly_amount + "</td>"
+                + "<td>" + Availability + "</td>"
+                + "<td>" + brand + "</td>"
+                + "<td>" + transmission + "</td>"
+                + "<td>" + daily_km + "</td>"
+                + "<td>" + monthly_km + "</td>"
+                + "<td>" + fuelType + "</td>"
+                + "<td>" + damageFee + "</td>"
+                + "<td>" + vehicleType + "</td>"
+                + "<td>" + service_milage + "</td>"
+                + "<td>" + last_service + "</td>"
+                + "</tr>";
+
+            $("#vehicleTableBody").append(row);
+        }
+
+        if(takeVal.seaVehicleType === searchTxt && searchKey === "TYPE"){
+
+
+            let vehicleId = takeVal.seaVehicleId;
+            let noOfPassengers = takeVal.seaNoOfPassengers;
+            let extraKmPrice = takeVal.seaExtraKmPrice;
+            let registrationNo = takeVal.seaRegistrationNo;
+            let Colour = takeVal.seaColour;
+            let daily_amount = takeVal.seaDaily_amount;
+            let monthly_amount = takeVal.seaMonthly_amount;
+            let Availability = takeVal.seaAvailability;
+            let brand = takeVal.seaBrand;
+            let transmission = takeVal.seaTransmission;
+            let daily_km = takeVal.seaDaily_km;
+            let monthly_km = takeVal.seaMonthly_km;
+            let fuelType = takeVal.seaFuelType;
+            let damageFee = takeVal.seaDamageFee;
+            let vehicleType = takeVal.seaVehicleType;
+            let service_milage = takeVal.seaService_milage;
+            let last_service = takeVal.seaLast_service;
+            let row = "<tr>"
+                + "<td>" + vehicleId + "</td>"
+                + "<td>" + noOfPassengers + "</td>"
+                + "<td>" + extraKmPrice + "</td>"
+                + "<td>" + registrationNo + "</td>"
+                + "<td>" + Colour + "</td>"
+                + "<td>" + daily_amount + "</td>"
+                + "<td>" + monthly_amount + "</td>"
+                + "<td>" + Availability + "</td>"
+                + "<td>" + brand + "</td>"
+                + "<td>" + transmission + "</td>"
+                + "<td>" + daily_km + "</td>"
+                + "<td>" + monthly_km + "</td>"
+                + "<td>" + fuelType + "</td>"
+                + "<td>" + damageFee + "</td>"
+                + "<td>" + vehicleType + "</td>"
+                + "<td>" + service_milage + "</td>"
+                + "<td>" + last_service + "</td>"
+                + "</tr>";
+
+            $("#vehicleTableBody").append(row);
+        }
+
+        if(takeVal.seaDaily_amount === parseInt(searchTxt) && searchKey === "PRICE"){
+
+
+            let vehicleId = takeVal.seaVehicleId;
+            let noOfPassengers = takeVal.seaNoOfPassengers;
+            let extraKmPrice = takeVal.seaExtraKmPrice;
+            let registrationNo = takeVal.seaRegistrationNo;
+            let Colour = takeVal.seaColour;
+            let daily_amount = takeVal.seaDaily_amount;
+            let monthly_amount = takeVal.seaMonthly_amount;
+            let Availability = takeVal.seaAvailability;
+            let brand = takeVal.seaBrand;
+            let transmission = takeVal.seaTransmission;
+            let daily_km = takeVal.seaDaily_km;
+            let monthly_km = takeVal.seaMonthly_km;
+            let fuelType = takeVal.seaFuelType;
+            let damageFee = takeVal.seaDamageFee;
+            let vehicleType = takeVal.seaVehicleType;
+            let service_milage = takeVal.seaService_milage;
+            let last_service = takeVal.seaLast_service;
+            let row = "<tr>"
+                + "<td>" + vehicleId + "</td>"
+                + "<td>" + noOfPassengers + "</td>"
+                + "<td>" + extraKmPrice + "</td>"
+                + "<td>" + registrationNo + "</td>"
+                + "<td>" + Colour + "</td>"
+                + "<td>" + daily_amount + "</td>"
+                + "<td>" + monthly_amount + "</td>"
+                + "<td>" + Availability + "</td>"
+                + "<td>" + brand + "</td>"
+                + "<td>" + transmission + "</td>"
+                + "<td>" + daily_km + "</td>"
+                + "<td>" + monthly_km + "</td>"
+                + "<td>" + fuelType + "</td>"
+                + "<td>" + damageFee + "</td>"
+                + "<td>" + vehicleType + "</td>"
+                + "<td>" + service_milage + "</td>"
+                + "<td>" + last_service + "</td>"
+                + "</tr>";
+
+            $("#vehicleTableBody").append(row);
+        }
+
+        if(takeVal.seaFuelType === searchTxt && searchKey === "FUEL"){
+
+
+            let vehicleId = takeVal.seaVehicleId;
+            let noOfPassengers = takeVal.seaNoOfPassengers;
+            let extraKmPrice = takeVal.seaExtraKmPrice;
+            let registrationNo = takeVal.seaRegistrationNo;
+            let Colour = takeVal.seaColour;
+            let daily_amount = takeVal.seaDaily_amount;
+            let monthly_amount = takeVal.seaMonthly_amount;
+            let Availability = takeVal.seaAvailability;
+            let brand = takeVal.seaBrand;
+            let transmission = takeVal.seaTransmission;
+            let daily_km = takeVal.seaDaily_km;
+            let monthly_km = takeVal.seaMonthly_km;
+            let fuelType = takeVal.seaFuelType;
+            let damageFee = takeVal.seaDamageFee;
+            let vehicleType = takeVal.seaVehicleType;
+            let service_milage = takeVal.seaService_milage;
+            let last_service = takeVal.seaLast_service;
+            let row = "<tr>"
+                + "<td>" + vehicleId + "</td>"
+                + "<td>" + noOfPassengers + "</td>"
+                + "<td>" + extraKmPrice + "</td>"
+                + "<td>" + registrationNo + "</td>"
+                + "<td>" + Colour + "</td>"
+                + "<td>" + daily_amount + "</td>"
+                + "<td>" + monthly_amount + "</td>"
+                + "<td>" + Availability + "</td>"
+                + "<td>" + brand + "</td>"
+                + "<td>" + transmission + "</td>"
+                + "<td>" + daily_km + "</td>"
+                + "<td>" + monthly_km + "</td>"
+                + "<td>" + fuelType + "</td>"
+                + "<td>" + damageFee + "</td>"
+                + "<td>" + vehicleType + "</td>"
+                + "<td>" + service_milage + "</td>"
+                + "<td>" + last_service + "</td>"
+                + "</tr>";
+
+            $("#vehicleTableBody").append(row);
+        }
+
+
+
+    }
+});
