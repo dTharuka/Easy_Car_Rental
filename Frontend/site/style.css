@@ -12,8 +12,11 @@
 /* Variables */
 :root {
   --main-color:#f9004d; ;
-  --text-color: #020102;
+  /*--text-color: #020102;*/
   --bg-color: #fff;
+  --text-color: #b2b0b0;
+  /*--bg-color: #020102;*/
+
 }
 /* Custom Scroll Bar */
 html::-webkit-scrollbar {
@@ -131,7 +134,7 @@ header.shadow #search-icon {
   /*box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px !important;*/
   display: flex;
   align-items: center;
-  background: url("../site/assets/1613998281-removebg-preview (1).png");
+  background: url("../site/assets/rolls-royce-ghost-black-badge-2019-front-ft.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center left;
