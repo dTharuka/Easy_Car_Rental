@@ -5,6 +5,7 @@ getAllCustomers();
 let cusIdOG ;
 let corntNumber;
 let getSplitId;
+let genaratedValue;
 $("#saveCustomer").on('click', function () {
     saveCustomer();
 });
@@ -95,6 +96,7 @@ function genarateCusID() {
     corntNumber=getSplitId[1];
      let count=parseInt(corntNumber);
      $('#id').val("C00-"+(count+1));
+    genaratedValue =$('#id').val();
 }
 
 
@@ -134,7 +136,6 @@ function getAllCustomers() {
     });
 }
 
-
 function bindRowClickEvents() {
     $("#customerTableBody>tr").on('click', function () {
         let id = $(this).children(":eq(0)").text();
@@ -164,6 +165,23 @@ function bindRowClickEvents() {
         $('#role').val(role);
         $('#userId').val(userId);
 
+
+        //TODO image repeating problem *******
+
+        $("#imgLoader").empty();
+        $("#imgLoader2").empty();
+        let key = $(this).children(":eq(0)").text();
+
+        const url = localStorage.getItem(key + "1stPhoto");
+        const img = new Image();
+        img.src = url;
+        $("#imgLoader").append(img);
+
+
+        const url2 = localStorage.getItem(key + "2stPhoto");
+        const img2 = new Image();
+        img2.src = url2;
+        $("#imgLoader2").append(img2);;
     });
 }
 
@@ -364,4 +382,86 @@ cusValidator(
         }
     )
 }
+
+
+//TODO image storing option local storage
+
+var imgArray = [];
+var verify1;
+
+$('#file').on("change", function (e) {
+    let file = e.target.files;
+    if (FileReader && file && file.length) {
+        let reader = new FileReader();
+        reader.onload = function () {
+            verify1 = reader.result;
+            imgArray.push(reader.result);
+            $('#display').css({
+                "background": `url(${reader.result})`, "background-size": "cover", "background-position": "center"
+            });
+        }
+        reader.readAsDataURL(file[0]);
+    }
+})
+
+$('#file2').on("change", function (e) {
+    let file = e.target.files;
+    if (FileReader && file && file.length) {
+        let reader = new FileReader();
+        reader.onload = function () {
+            imgArray.push(reader.result);
+            $('#display2').css({
+                "background": `url(${reader.result})`, "background-size": "cover", "background-position": "center"
+            });
+        }
+        reader.readAsDataURL(file[0]);
+    }
+})
+let row;
+
+
+const reader = new FileReader();
+const reader2 = new FileReader();
+
+
+$('#saveCustomer').on("click", function () {
+
+    const nicDlImageFile = document.getElementById('file');
+    const imgFile = nicDlImageFile.files[0];
+    reader.readAsDataURL(imgFile);
+
+    reader.addEventListener('load', () => {
+        const url = reader.result
+        localStorage.setItem((genaratedValue + "1stPhoto"), url);
+    });
+
+    const nicDlImageFile2 = document.getElementById('file2');
+    const imgFile2 = nicDlImageFile2.files[0];
+    reader2.readAsDataURL(imgFile2);
+
+    reader2.addEventListener('load', () => {
+        const url = reader2.result
+        localStorage.setItem(genaratedValue + "2stPhoto", url);
+    });
+});
+
+let count;
+
+// function loadingImg() {
+//     $("#customerTableBody>tr").on('click', function () {
+//
+//             let key = $(this).children(":eq(0)").text();
+//
+//             const url = localStorage.getItem(key + "1stPhoto");
+//             const img = new Image();
+//             img.src = url;
+//             $("#imgLoader").append(img);
+//
+//
+//             const url2 = localStorage.getItem(key + "2stPhoto");
+//             const img2 = new Image();
+//             img2.src = url2;
+//             $("#imgLoader2").append(img2);
+//     });
+// }
 

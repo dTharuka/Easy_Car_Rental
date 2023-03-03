@@ -644,80 +644,80 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js">
 </script>
 <script>
-    var imgArray=[];
-    var verify1;
-    var verify2;
-
-    //file reader obj
-    const reader = new FileReader();
-
-    $('#file').on("change", function (e) {
-        let file = e.target.files;
-        if (FileReader && file && file.length) {
-            let reader = new FileReader();
-            reader.onload = function () {
-                verify1=reader.result;
-                imgArray.push(reader.result);
-                $('#display').css({
-                    "background": `url(${reader.result})`,
-                    "background-size": "cover",
-                    "background-position": "center"
-                });
-            }
-            reader.readAsDataURL(file[0]);
-        }
-
-    })
-
-    $('#file2').on("change", function (e) {
-        let file = e.target.files;
-        if (FileReader && file && file.length) {
-            let reader = new FileReader();
-            reader.onload = function () {
-                imgArray.push(reader.result);
-                $('#display2').css({
-                    "background": `url(${reader.result})`,
-                    "background-size": "cover",
-                    "background-position": "center"
-                });
-            }
-            reader.readAsDataURL(file[0]);
-        }
-
-    })
-    let row;
-    $('#btnUpload').click(function (){
-
-        let first=imgArray[0];
-        let second=imgArray[1];
-
-        if(verify1!==first){
-            verify2=second;
-            second=first;
-            first=verify2;
-        }
-
-        row = `<tr><td><img src=${first} width="50px" height="50px"></td><td><img src=${second} width="50px" height="50px"></td></tr>`
-        $("#table").append(row);
-        imgArray.length=0;
-
-        //=========== save nic/dl image on local storage (web) ============
-        const nicDlImageFile = document.getElementById('file');
-
-        // Get file from input element
-        const imgFile = nicDlImageFile.files[0];
-        reader.readAsDataURL(imgFile);
-
-        reader.addEventListener('load', () => {
-            //get converted url
-            const url = reader.result
-
-            // add image to localStorage (save image)
-            localStorage.setItem("1stPhoto", url);
-        });
-
-
-    });
+    // var imgArray=[];
+    // var verify1;
+    // var verify2;
+    //
+    // //file reader obj
+    // const reader = new FileReader();
+    //
+    // $('#file').on("change", function (e) {
+    //     let file = e.target.files;
+    //     if (FileReader && file && file.length) {
+    //         let reader = new FileReader();
+    //         reader.onload = function () {
+    //             verify1=reader.result;
+    //             imgArray.push(reader.result);
+    //             $('#display').css({
+    //                 "background": `url(${reader.result})`,
+    //                 "background-size": "cover",
+    //                 "background-position": "center"
+    //             });
+    //         }
+    //         reader.readAsDataURL(file[0]);
+    //     }
+    //
+    // })
+    //
+    // $('#file2').on("change", function (e) {
+    //     let file = e.target.files;
+    //     if (FileReader && file && file.length) {
+    //         let reader = new FileReader();
+    //         reader.onload = function () {
+    //             imgArray.push(reader.result);
+    //             $('#display2').css({
+    //                 "background": `url(${reader.result})`,
+    //                 "background-size": "cover",
+    //                 "background-position": "center"
+    //             });
+    //         }
+    //         reader.readAsDataURL(file[0]);
+    //     }
+    //
+    // })
+    // let row;
+    // $('#btnUpload').click(function (){
+    //
+    //     let first=imgArray[0];
+    //     let second=imgArray[1];
+    //
+    //     if(verify1!==first){
+    //         verify2=second;
+    //         second=first;
+    //         first=verify2;
+    //     }
+    //
+    //     row = `<tr><td><img src=${first} width="50px" height="50px"></td><td><img src=${second} width="50px" height="50px"></td></tr>`
+    //     $("#table").append(row);
+    //     imgArray.length=0;
+    //
+    //     //=========== save nic/dl image on local storage (web) ============
+    //     const nicDlImageFile = document.getElementById('file');
+    //
+    //     // Get file from input element
+    //     const imgFile = nicDlImageFile.files[0];
+    //     reader.readAsDataURL(imgFile);
+    //
+    //     reader.addEventListener('load', () => {
+    //         //get converted url
+    //         const url = reader.result
+    //
+    //         // add image to localStorage (save image)
+    //         localStorage.setItem("1stPhoto", url);
+    //     });
+    //
+    //
+    // });
 
     $('#saveCustomer').click(function (){
         $('#imageTable>tbody').empty();
