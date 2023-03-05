@@ -7,11 +7,24 @@ getAllVehicle();
 let vehiclceOID ;
 let availableVehiID;
 let splitVehiId;
+const vehicleFrontImgReader = new FileReader();
+let genaratedVehicleValue;
 
 let vehicleSearchArray=[];
 
 $("#saveVehicle").on('click', function () {
     saveVehicle();
+
+    const frontImageFile = document.getElementById('car1');
+    const imgFile = frontImageFile.files[0];
+    vehicleFrontImgReader.readAsDataURL(imgFile);
+
+    vehicleFrontImgReader.addEventListener('load', () => {
+        const url = vehicleFrontImgReader.result
+        localStorage.setItem((genaratedVehicleValue + "frontPhoto"), url);
+    });
+
+
 });
 
 function saveVehicle() {
@@ -33,6 +46,7 @@ function genarateVehiID() {
     availableVehiID=splitVehiId[1];
     let count=parseInt(availableVehiID);
     $('#vehicleId').val("V00-"+(count+1));
+    genaratedVehicleValue=$('#vehicleId').val();
 }
 
 function getAllVehicle() {
@@ -55,13 +69,9 @@ function getAllVehicle() {
                 let daily_km = c.freeMileage.dailyMileage;
                 let monthly_km = c.freeMileage.monthlyMileage;
                 let fuelType = c.fuelType;
-
                 let damageFee = c.refundableDamagedFee;
-
                 let vehicleType = c.vehicleType;
-
                 let service_milage = c.vehicleMileage;
-
                 let last_service = c.lastServiceMileage;
 
 
@@ -903,3 +913,7 @@ $('#search').click(function (){
 
     }
 });
+
+
+
+

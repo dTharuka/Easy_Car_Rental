@@ -419,7 +419,6 @@ $('#file2').on("change", function (e) {
 })
 let row;
 
-
 const reader = new FileReader();
 const reader2 = new FileReader();
 
