@@ -37,10 +37,9 @@ function loadingAllVehiclesForFrontendPage() {
                 const url = localStorage.getItem(vehicleId + "frontPhoto");
                 const img = new Image();
                 img.src = url;
-                $("#addingVehicles").append(img);
-
-                let vehicle_addons = `<div class="box">
-                                            <img alt="" class="sample"  src="">
+                // $("#addingVehicles").append(img);
+                let vehicle_addons = `<div class="box" style="background-color: #1c1b1b !important;">
+                                            <img alt="" class="sample"  src="`+url+`">
                                             <h3>` + brand + `</h3>
                                             <hr>
                                             <p>Daily - ` + daily_amount + `LKR</p>
@@ -52,6 +51,7 @@ function loadingAllVehiclesForFrontendPage() {
                                        </div>`;
 
                 $("#addingVehicles").append(vehicle_addons);
+
             }
         }, error: function (error) {
             let message = JSON.parse(error.responseText).message;

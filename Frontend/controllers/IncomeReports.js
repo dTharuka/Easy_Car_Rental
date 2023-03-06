@@ -12,8 +12,8 @@ function getAllByDailyRevenues() {
             for (let c of res.data) {
                 console.log(c);
 
-                // let row = "<tr>" + "<td>" +c+ "</td>" + "<td>" + c + "</td>"+"</tr>";
-                $("#incomeReportsDailyTable").append(c+"<br>");
+                let row = "<tr>" + "<td>" +c[0]+ "</td>" + "<td>" + c[1] + "</td>"+"</tr>";
+                $("#incomeReportsDailyTable").append(row);
             }
 
         }, error: function (error) {
