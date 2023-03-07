@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
-    <title>Dakshina Rajapaksha Inc. Income Reports</title>
+    <title>Dakshina Rajapaksha Inc.</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
     <!-- Nucleo Icons -->
@@ -375,41 +375,78 @@
     <!-- End Navbar -->
     <div class="container-fluid py-4">
 
-        <div class="row">
-            <div class="col-12"><br><br>
-                <div class="card mb-4 blinkAnim">
-                    <div class="card-header pb-0">
-                        <h6>Payment table</h6>
+        <div class="row col-lg-12 content-center">
+
+            <div class="card col-lg-4  blinkAnim content-center" style="margin-right: 20px !important;">
+                <div class="card-header pb-0">
+                    <h6>Revenue by Daily</h6>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center justify-content-center mb-0">
+                            <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Date
+                                </th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    Revenue By Date
+                                </th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody id="incomeReportsDailyTable">
+                            <!--=====================================================================================================   this is second table-->
+                            <tr>
+
+
+                            </tr>
+
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center justify-content-center mb-0">
-                                <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Amount
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Date
-                                    </th>
+                </div>
+
+            </div>
+            <div class="card col-lg-4 blinkAnim content-center">
+                <div class="card-header pb-0">
+                    <h6>Revenue by Monthly</h6>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center justify-content-center mb-0">
+                            <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Month
+                                </th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    Value
+                                </th>
 
 
-                                </tr>
-                                </thead>
-                                <tbody id="incomeReportsDailyTable">
-                                <!--=====================================================================================================   this is second table-->
-                                <tr>
+                            </tr>
+                            </thead>
+                            <tbody id="incomeReportsMonthlyTable">
+                            <!--=====================================================================================================   this is second table-->
+                            <tr>
 
 
-                                </tr>
+                            </tr>
 
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+            <div class="card col-lg-4 blinkAnim">
+
+            </div>
+
+
         </div>
+
         <footer class="footer pt-3  ">
             <div class="container-fluid">
                 <div class="row align-items-center justify-content-lg-between">
@@ -478,31 +515,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!--        <div class="col-6 mt-2">-->
-                <!--          <div class="form-group">-->
-                <!--            <label>Cash</label>-->
-                <!--            <label for="txtCash"></label>-->
-                <!--            <input class="searchFld form-control" id="txtCash" min="0" type="number">-->
-                <!--            <span class="control-error" id="cash-empty-error"></span>-->
-                <!--          </div>-->
-                <!--        </div>-->
-
-                <!--        <div class="col-6 mt-2">-->
-                <!--          <div class="form-group">-->
-                <!--            <label>Discount</label>-->
-                <!--            <label for="txtDiscount"></label>-->
-                <!--            <input class="searchFld form-control" id="txtDiscount" min="0" type="number">-->
-                <!--          </div>-->
-                <!--        </div>-->
-
-                <!--        <div class="col-12">-->
-                <!--          <div class="form-group">-->
-                <!--            <label>Balance</label>-->
-                <!--            <label for="txtBalance"></label>-->
-                <!--            <input class="searchFld form-control" disabled id="txtBalance" type="text">-->
-                <!--          </div>-->
-                <!--        </div>-->
 
             </div>
         </section>

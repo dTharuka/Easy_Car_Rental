@@ -22,6 +22,11 @@ public class IncomeFormController {
         return new ResponseUtil("OK", "Successfully Loaded ! ", incomeService.getCurrentIncomeByDate());
     }
 
+    @GetMapping("/by_month")
+    public ResponseUtil getRevenueByMonth(){
+        return new ResponseUtil("OK", "Successfully Loaded ! ", incomeService.getCurrentIncomeByMonth());
+    }
+
     @GetMapping("/by_year")
     public ResponseUtil getRevenueByYear(){
         return new ResponseUtil("OK", "Successfully Loaded ! ", incomeService.getCurrentIncomeByYear());

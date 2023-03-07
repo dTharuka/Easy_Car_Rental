@@ -6,10 +6,10 @@ import lk.ijse.dto.PaymentDTO;
 import java.util.List;
 
 public interface IncomeService {
-    List getCurrentIncomeByDate();
+    List<?> getCurrentIncomeByDate();
 
-    List getCurrentIncomeByMonth();
+    List<?> getCurrentIncomeByMonth();
 
-    List getCurrentIncomeByYear();
+    List<?> getCurrentIncomeByYear();
 
 }

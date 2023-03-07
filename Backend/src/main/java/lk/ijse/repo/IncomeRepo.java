@@ -10,8 +10,12 @@ import java.util.List;
 
 public interface IncomeRepo extends JpaRepository<Payment, String> {
     @Query(value = "SELECT SUM(amount),date FROM payment GROUP BY date", nativeQuery = true)
-    List getRevenueByDate();
+    List<?> getRevenueByDate();
+
+    @Query(value = "SELECT MONTH(date) AS month, SUM(amount) AS monthly_amount FROM payment GROUP BY MONTH(date)", nativeQuery = true)
+    List<?> getRevenueByMonth();
 
     @Query(value = "SELECT SUM(amount)FROM payment;", nativeQuery = true)
-    List getRevenueByYear();
+    List<?> getRevenueByYear();
+
 }
