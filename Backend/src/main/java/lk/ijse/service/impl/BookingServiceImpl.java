@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -67,5 +68,21 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public long countBooking() {
         return bookingRepo.count();
+    }
+
+    @Override
+    public List<BookingDTO> getBookingDetails() {
+        List<BookingDTO> list = new ArrayList<>();
+        List<Booking> all = bookingRepo.findAll();
+        for (Booking b : all) {
+            CustomerDTO dto = modelMapper.map(b.getCustomer(), CustomerDTO.class);
+            BookingDTO b1 = new BookingDTO(b.getBookingId(), b.getPickUpDate(), b.getPickUpTime(), b.getReturnDate(), b.getDriverRequestType(), dto, b.getPickUpLocation());
+            list.add(b1);
+            System.out.println("==============================================================================");
+            System.out.println(b.getDriverRequestType());
+            System.out.println("==============================================================================");
+
+        }
+        return list;
     }
 }

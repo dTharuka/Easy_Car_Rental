@@ -60,4 +60,9 @@ public class BookingController {
     public ResponseUtil countBooking(@PathVariable String count) {
         return new ResponseUtil("Ok", "", bookingService.countBooking());
     }
+
+    @GetMapping(value = "/get_all_bookings", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil getAllBookingDetails() {
+        return new ResponseUtil("OK", "Successful", bookingService.getBookingDetails());
+    }
 }

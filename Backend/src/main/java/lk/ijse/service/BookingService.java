@@ -6,6 +6,7 @@ import lk.ijse.dto.DriverDTO;
 import lk.ijse.dto.VehicleDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface BookingService {
 
@@ -19,6 +20,6 @@ public interface BookingService {
 
     long countBooking();
 
-
+    List<BookingDTO> getBookingDetails();
 
 }
