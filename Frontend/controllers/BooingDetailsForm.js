@@ -11,7 +11,7 @@ function getAllBookingDetails() {
 
 
                 let bookingID = c.bookingId;
-                let requestType = c.DriverRequestType;
+                let requestType = c.driverRequestType;
                 let pickUpDate = c.pickUpDate;
                 let pickUpLocation = c.pickUpLocation;
                 let pickUpTime = c.pickUpTime;
