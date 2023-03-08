@@ -719,23 +719,23 @@
     //
     // });
 
-    $('#saveCustomer').click(function (){
-        $('#imageTable>tbody').empty();
-
-        const nicDlImageFile = document.getElementById('file2');
-
-        // Get file from input element
-        const imgFile = nicDlImageFile.files[0];
-        reader.readAsDataURL(imgFile);
-
-        reader.addEventListener('load', () => {
-            //get converted url
-            const url = reader.result
-
-            // add image to localStorage (save image)
-            localStorage.setItem("2stPhoto", url);
-        });
-    });
+    // $('#saveCustomer').click(function (){
+    //     $('#imageTable>tbody').empty();
+    //
+    //     const nicDlImageFile = document.getElementById('file2');
+    //
+    //     // Get file from input element
+    //     const imgFile = nicDlImageFile.files[0];
+    //     reader.readAsDataURL(imgFile);
+    //
+    //     reader.addEventListener('load', () => {
+    //         //get converted url
+    //         const url = reader.result
+    //
+    //         // add image to localStorage (save image)
+    //         localStorage.setItem("2stPhoto", url);
+    //     });
+    // });
 
 
 

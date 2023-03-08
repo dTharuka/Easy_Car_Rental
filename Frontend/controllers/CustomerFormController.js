@@ -140,7 +140,7 @@ function bindRowClickEvents() {
     $("#customerTableBody>tr").on('click', function () {
         let id = $(this).children(":eq(0)").text();
         let firstName = $(this).children(":eq(1)").text();
-        let lastName = $(this).children(":eq(1)").text();
+        let lastName = $(this).children(":eq(2)").text();
         let address = $(this).children(":eq(3)").text();
         let email = $(this).children(":eq(4)").text();
         let contactNo = $(this).children(":eq(5)").text();
@@ -394,7 +394,7 @@ $('#file').on("change", function (e) {
     if (FileReader && file && file.length) {
         let reader = new FileReader();
         reader.onload = function () {
-            verify1 = reader.result;
+            //verify1 = reader.result;
             imgArray.push(reader.result);
             $('#display').css({
                 "background": `url(${reader.result})`, "background-size": "cover", "background-position": "center"
