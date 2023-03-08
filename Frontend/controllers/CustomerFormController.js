@@ -19,7 +19,9 @@ function saveCustomer() {
         dataType: "json",
         success: function (res) {
             getAllCustomers();
+            clearTextFields();
             alert(res.message);
+            window.location.reload();
         },
         error: function (error) {
             var errorMessage = JSON.parse(error.responseText);
@@ -198,6 +200,7 @@ function clearTextFields() {
     $('#drivingLicenseNo').val("");
     $('#role').val("");
     $('#userId').val("");
+
 }
 
 loadAllDriversToCombo();
